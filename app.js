@@ -11,6 +11,12 @@ const path         = require('path');
 const cors = require('cors');
 
 
+const session = require('express-session');
+const passport = require('passport');
+
+require("./configs/passport")
+
+
 mongoose
   .connect('mongodb://localhost/recordcollection', {useNewUrlParser: true})
   .then(x => {
@@ -45,6 +51,20 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+// ADD SESSION SETTINGS HERE:
+const MongoStore = require('connect-mongo')(session);
+app.use(session({
+  secret: "doesn't matter in our case", // but it's required
+  resave: false,
+  saveUninitialized: false, // don't create cookie for non-logged-in user
+  // MongoStore makes sure the user stays logged in also when the server restarts
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
+// USE passport.initialize() and passport.session() HERE:
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 // default value for title local
@@ -63,6 +83,9 @@ app.use(
 
 const index = require('./routes/index');
 app.use('/', index);
+
+
+app.use('/api', require('./routes/user-routes'))
 
 
 module.exports = app;
