@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Signup from './components/Signup.js'
+import Login from './components/Login.js'
+import Profile from './components/Profile'
 
-function App() {
-  return (
+import { Route , } from 'react-router-dom'
+
+class App extends Component {
+
+  state = {
+    loggedInUser : this.props.user
+  }
+
+    // user is not logged in already --> they are logging in using our React app
+    updateUser = (newUser) => {
+      this.setState({
+        loggedInUser: newUser
+      })
+    }
+
+
+    render () {
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Route exact path="/profile" render={() => <Profile user={this.state.loggedInUser} />} />
+        <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
+        <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
     </div>
-  );
+    );
+    }
 }
 
 export default App;
