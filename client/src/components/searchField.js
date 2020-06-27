@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
 class SearchField extends Component {
@@ -24,21 +25,27 @@ class SearchField extends Component {
   };
 
   render() {
-
     return (
-      <div>
-        <form>
+      <div className="col-6">
+        <form className="input-group mb-3">
           <input
             type="text"
-            className="input"
+            className="form-control"
             name="search"
             value={this.state.search}
             onChange={this.searchHandler}
             placeholder="search for artist"
           />
-          <button type="submit" onClick={this.submitHandler}>
-            Submit
-          </button>
+
+          <div className="input-group-append">
+            <button
+              className="btn btn-dark"
+              type="submit"
+              onClick={this.submitHandler}
+            >
+              Search
+            </button>
+          </div>
         </form>
       </div>
     );
