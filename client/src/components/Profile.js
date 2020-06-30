@@ -7,12 +7,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import SearchField from './searchField'
 import Logout from './Logout.js'
 
-class Profile extends Component {
 
-  state ={
+class Profile extends Component 
+{
+    state = {
     searchTerm: "",
     records: []
   }
+
+
+
+updateUser = () => {
+    this.props.updateUser(null)
+  }
+
 
   componentDidMount () {
     axios.get('/api/records').then((allRecords) => {
@@ -37,6 +45,8 @@ class Profile extends Component {
          {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
         <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} />
          {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
+         <Logout logoutUser={this.updateUser}></Logout>
+ 
       </div>
     )
   }

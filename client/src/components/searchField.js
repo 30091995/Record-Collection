@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
 class SearchField extends Component {
@@ -8,7 +7,6 @@ class SearchField extends Component {
   };
 
   searchHandler = (event) => {
-    // this.props.instantSearchHandler(this.state.search);
 
     this.setState({
       search: event.target.value,
@@ -26,20 +24,18 @@ class SearchField extends Component {
 
   render() {
     return (
-      <div className="col-6">
-        <form className="input-group mb-3">
+      <div>
+        <form>
           <input
             type="text"
-            className="form-control"
             name="search"
             value={this.state.search}
             onChange={this.searchHandler}
             placeholder="search for artist"
           />
 
-          <div className="input-group-append">
+          <div>
             <button
-              className="btn btn-dark"
               type="submit"
               onClick={this.submitHandler}
             >

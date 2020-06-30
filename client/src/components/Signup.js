@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./Signup.css";
-import "bootstrap/dist/css/bootstrap.css";
-// import '../../public/jake-noren-LJTlJ3MVYKM-unsplash.jpg'
 import { Redirect } from "react-router-dom";
+
 
 class Signup extends Component {
   state = {
@@ -50,23 +48,21 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="row fullHeight justify-content-center">
-        <div className="col col-md-8 align-self-center">
+      <div>
+        <div>
           {this.renderRedirect()}
           <form
-            className="border rounded p-4 mx-4 mx-lg-5 signupForm bg-white shadow"
             onSubmit={this.handleFormSubmit}
           >
-            <div className="form-group">
-              <div className="h2">Signup</div>
+            <div>
+              <h2>Signup</h2>
             </div>
 
             <hr></hr>
 
-            <div className="form-group">
+            <div>
               <label>E-mail</label>
               <input
-                className="form-control"
                 type="text"
                 name="email"
                 value={this.state.email}
@@ -75,25 +71,23 @@ class Signup extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div>
               <label>Password</label>
               <input
-                className="form-control"
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleChange}
                 required
               />
-              <small id="emailHelp" className="form-text text-muted">
+              <small id="emailHelp">
                 Please choose more than 6 characters
               </small>
             </div>
 
-            <div className="form-group">
+            <div>
               <label>Username</label>
               <input
-                className="form-control"
                 type="text"
                 name="username"
                 value={this.state.username}
@@ -101,18 +95,17 @@ class Signup extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div>
               <label>Full Name</label>
               <input
-                className="form-control"
                 type="text"
                 name="fullname"
                 value={this.state.fullname}
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
-              <button className="btn btn-dark" type="submit" value="Signup">
+            <div>
+              <button type="submit" value="Signup">
                 Submit
               </button>
             </div>
