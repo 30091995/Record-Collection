@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.css";
-import "./Login.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -49,27 +47,23 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="row fullHeightLogin justify-content-center">
-        <div className="col col-md-8 align-self-center">
-          {this.renderRedirect()}
-          {this.state.errorMessage ? <h1>{this.state.errorMessage}</h1> : null}
-          <form
-            onSubmit={this.handleSubmit}
-            className="border rounded p-4 mx-4 mx-lg-5 loginForm bg-white shadow"
-            noValidate
-          >
-            <div className="form-group">
-              <div className="h2">Login</div>
-            </div>
+            <div>
+              {this.renderRedirect()}
+              {this.state.errorMessage ? (
+                <h1>{this.state.errorMessage}</h1>
+              ) : null}
+              <form
+                onSubmit={this.handleSubmit}
+              >
+                <div>
+                  <h2>Login</h2>
+                </div>
 
-            <hr></hr>
+                <hr></hr>
 
-            <div className="form-group">
-              <div className="form-row">
-                <div className="col">
+                <div>
                   <label>E-mail</label>
                   <input
-                    className="form-control"
                     type="text"
                     name="email"
                     value={this.state.email}
@@ -78,10 +72,9 @@ class Login extends Component {
                   />
                 </div>
 
-                <div className="col">
+                <div>
                   <label>Password</label>
                   <input
-                    className="form-control"
                     type="password"
                     name="password"
                     value={this.state.password}
@@ -89,17 +82,32 @@ class Login extends Component {
                     required
                   />
                 </div>
-              </div>
-            </div>
 
-            <div className="form-group">
-              <button type="submit" className="btn btn-dark">
-                Login
-              </button>
+                <div>
+                  <div>
+                    <button type="submit">
+                      Login
+                    </button>
+                  </div>
+
+                  <div>
+                    <Link to="/">
+                      {" "}
+                      <button>
+                        Sign in with Google
+                      </button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/">
+                      <button>
+                        Sign in with Slack
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
     );
   }
 }
