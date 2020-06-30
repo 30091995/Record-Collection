@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
 class Logout extends Component {
 
@@ -20,7 +21,7 @@ class Logout extends Component {
   render() {
     return (
     !this.state.redirect 
-    ? <div type="submit" onClick={this.clickHandler}>Logout</div>
+    ? <Button variant="primary" type="submit" onClick={this.clickHandler}>Logout</Button>
     : <Redirect to="/"/>
     )
   }

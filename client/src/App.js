@@ -11,13 +11,12 @@ class App extends Component {
     loggedInUser: this.props.user
   }
 
-    // user is not logged in already --> they are logging in using our React app
+    // user is not logged in yet --> they are logging in using our React app
     updateUser = (newUser) => {
       this.setState({
         loggedInUser: newUser
       })
     }
-
 
     render () {
     return (

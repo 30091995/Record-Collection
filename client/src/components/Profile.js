@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-
-import SearchBar from './Searchbar'
 import axios from 'axios'
+import SearchBar from './Searchbar'
 import RecordRow from './RecordRow'
-
-import Logout from './Logout.js'
+import NavigationBar from './NavigationBar.js'
 
 
 class Profile extends Component 
@@ -40,12 +38,11 @@ updateUser = () => {
     let filtered = []
     filtered = this.state.records.filter((record) => record.albumName.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
     return(
-      <div className="container">        
+      <div>   
+      <NavigationBar logoutUser={this.updateUser}></NavigationBar>
          {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
         <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} />
          {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
-         <Logout logoutUser={this.updateUser}></Logout>
- 
       </div>
     )
   }

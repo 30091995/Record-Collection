@@ -12,7 +12,7 @@ class Start extends Component {
       <div>You are already logged in, why don't you check out your <Link to="/profile">Profile</Link>?</div>
      : 
       <div>
-        <div>STARTPAGE OF APP</div>
+        <div className="display-1">STARTPAGE OF APP</div>
        <p><Link to="/signup">Signup</Link></p>
        <p><Link to="/login">Login</Link></p>
       </div>
