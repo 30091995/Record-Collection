@@ -86,4 +86,6 @@ app.use('/', index);
 
 app.use('/api', require('./routes/user-routes'))
 
+app.use('/api', require('./routes/record-routes'))
+
 module.exports = app;
