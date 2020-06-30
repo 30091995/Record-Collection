@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
-import "bootstrap/dist/css/bootstrap.css";
 import SearchField from './searchField'
 import Logout from './Logout.js'
 
+
 class Profile extends Component {
+
+  updateUser = () => {
+    this.props.updateUser(null)
+  }
+
   render () {
     return(
-      <div className="container">
+      <div>
 
 
         
         {this.props.user 
-          ? <div>
-              <h4>Hello {this.props.user.fullname}</h4> 
-              <SearchField></SearchField>
-              <Logout></Logout>
-            </div> 
+          ? <h4>Hello {this.props.user.fullname}</h4> 
           : ''
         }
+
+              <SearchField></SearchField>
+              <Logout logoutUser={this.updateUser}></Logout>
+  
 
       </div>
     )
