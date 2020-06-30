@@ -19,18 +19,24 @@ userRoutes.post('/signup', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ email }, (err, foundUser) => {
-
-    if (err) {
-      res.status(500).json({ message: "Username check went bad." });
-      return;
+  User.findOne({ username })
+  .then((u) => {
+    if (u !== null)
+    {
+      res.redirect('/signup') // username already exists
+      throw new Error('Username already exists')
     }
+    return User.findOne({ email })
+  })
+  .then((u) => {
 
-    if (foundUser) {
-      res.status(400).json({ message: 'e-Mail taken. Choose another one.' });
-      return;
+    if (u !== null)
+    {
+      res.redirect('/signup') // email already exists
+      throw new Error('Email already exists')
     }
-
+  })
+  .then(() => {
     const salt = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);
 
@@ -41,6 +47,8 @@ userRoutes.post('/signup', (req, res, next) => {
       fullname: fullname
     });
 
+
+
     aNewUser.save().then(() => {
       // Automatically log in user after sign up
       // .login() here is actually a predefined passport method
@@ -49,9 +57,9 @@ userRoutes.post('/signup', (req, res, next) => {
         // Send the user's information to the frontend
         // We can use also: res.status(200).json(req.user);
         res.status(200).json(aNewUser);
-      });
     });
-  });
+    });
+  })
 });
 
 

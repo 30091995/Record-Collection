@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import SearchBar from './Searchbar'
 import axios from 'axios'
 import RecordRow from './RecordRow'
-import "bootstrap/dist/css/bootstrap.css";
-import SearchField from './searchField'
+
 import Logout from './Logout.js'
 
 
@@ -13,7 +12,7 @@ class Profile extends Component
     state = {
     searchTerm: "",
     records: []
-  }
+    }
 
 
 
