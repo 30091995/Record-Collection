@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+
 import SearchBar from './Searchbar'
 import axios from 'axios'
 import RecordRow from './RecordRow'
+import "bootstrap/dist/css/bootstrap.css";
+import SearchField from './searchField'
+import Logout from './Logout.js'
 
 class Profile extends Component {
 
@@ -29,8 +33,8 @@ class Profile extends Component {
     let filtered = []
     filtered = this.state.records.filter((record) => record.albumName.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
     return(
-      <div>
-        {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
+      <div className="container">        
+         {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
         <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} />
          {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
       </div>
