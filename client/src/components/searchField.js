@@ -15,7 +15,7 @@ class SearchField extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    axios.get("/profile/" + this.state.search).then((response) => {
+    axios.get("/api/searchArtist/" + this.state.search).then((response) => {
       this.setState({
         search: "",
       });

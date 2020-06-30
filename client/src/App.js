@@ -3,6 +3,7 @@ import Signup from './components/Signup.js'
 import Login from './components/Login.js'
 import Start from './components/Start.js'
 import Profile from './components/Profile'
+import ShowArtists from './components/ShowArtists.js'
 import { Route , } from 'react-router-dom'
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
     <div className="App">
         <Route exact path="/" render={() => <Start user={this.state.loggedInUser}/>} />
         <Route exact path="/profile" render={() => <Profile user={this.state.loggedInUser} updateUser={this.updateUser}/>} />
+        <Route exact path="/searchArtist" render={() => <ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>} />
         <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
         <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
     </div>
