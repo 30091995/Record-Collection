@@ -40,7 +40,7 @@ class ShowArtists extends Component{
         </form>
 
         
-        {this.state.artists.map((singleArtist) => <div key={singleArtist.id} ><Link to={""}> {singleArtist.title} <br /></Link> </div>) }
+        {this.state.artists.map((singleArtist) => <div key={singleArtist.id} ><img src={singleArtist.cover_image} alt="Pic no available" /><Link to={"/artist/" + singleArtist.id + "/releases"}>{singleArtist.title} <br /></Link> </div>) }
       </div>
     )
   }

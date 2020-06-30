@@ -35,6 +35,18 @@ recordRoutes.get("/searchArtist/:artistname", (req, res, next) => {
     });
 });
 
+recordRoutes.get("/showReleases/:artistId", (req, res, next) => {
+
+  let url = 'https://api.discogs.com/artists/' + req.params.artistId + "/releases" +
+  `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`
+
+  axios
+  .get(url)
+  .then((response) => {
+    res.json(response.data)
+  })
+})
+
 module.exports = recordRoutes
 
 
