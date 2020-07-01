@@ -4,22 +4,27 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
 function Searchbar(props) {
+
   let searchHandler = (event) => {
     let inputValue = event.target.value;
     props.onSearchCallBack(inputValue);
   };
 
+  let sub = () => {
+    props.onSubmit()
+  }
+
   return (
     <InputGroup className="mb-3">
       <FormControl
-        placeholder="Search for artist"
-        aria-label="Search for artist"
+        placeholder={props.placeholder}
+        aria-label={props.placeholder}
         aria-describedby="basic-addon2"
         onChange={searchHandler}
         value={props.currentSearchTerm}
       />
       <InputGroup.Append>
-        <Button variant="outline-secondary">Search</Button>
+        <Button onClick={sub} variant="outline-secondary">{props.children}</Button>
       </InputGroup.Append>
     </InputGroup>
   );
