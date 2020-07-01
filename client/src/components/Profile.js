@@ -12,13 +12,6 @@ class Profile extends Component
     records: []
     }
 
-
-
-updateUser = () => {
-    this.props.updateUser(null)
-  }
-
-
   componentDidMount () {
     axios.get('/api/records').then((allRecords) => {
       this.setState({
@@ -39,9 +32,8 @@ updateUser = () => {
     filtered = this.state.records.filter((record) => record.albumName.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
     return(
       <div>   
-      <NavigationBar logoutUser={this.updateUser}></NavigationBar>
          {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
-        <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} />
+        <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} placeholder="Search">Search</SearchBar>
          {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
       </div>
     )

@@ -6,6 +6,7 @@ import Profile from './components/Profile'
 import ShowArtists from './components/ShowArtists.js'
 import { Route , } from 'react-router-dom'
 import ShowReleases from './components/ShowReleases.js'
+import NavigationBar from './components/NavigationBar.js';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
     render () {
     return (
     <div className="App">
+    {this.state.loggedInUser ? <Route path="/" render={() => <NavigationBar updateUser={this.updateUser}></NavigationBar>} /> : null }
         <Route exact path="/" render={() => <Start user={this.state.loggedInUser}/>} />
         <Route exact path="/profile" render={() => <Profile user={this.state.loggedInUser} updateUser={this.updateUser}/>} />
         <Route exact path="/searchArtist" render={() => <ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>} />
