@@ -11,7 +11,6 @@ class ShowReleases extends Component {
       this.setState({
         releases : releases.data.releases.filter((singleRelease) => singleRelease.type === "master")
       })
-      console.log(this.state.releases)
     })
   }
 
