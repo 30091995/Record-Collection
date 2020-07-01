@@ -29,6 +29,7 @@ class ShowArtists extends Component {
     return (
       <div>
         <h3>Search Artist :</h3>
+        {this.state.artists.map((singleArtist) => <div key={singleArtist.id} ><img src={singleArtist.cover_image} alt="Pic no available" /><Link to={"/artist/" + singleArtist.id + "/releases"}>{singleArtist.title} <br /></Link> </div>) }
 
         <SearchBar
           onSearchCallBack={this.searchHandler}
@@ -37,14 +38,6 @@ class ShowArtists extends Component {
           placeholder="Type in Artist"
         >Search for Artist</SearchBar>
 
-        {this.state.artists.map((singleArtist) => (
-          <div key={singleArtist.id}>
-            <Link to={""}>
-              {" "}
-              {singleArtist.title} <br />
-            </Link>{" "}
-          </div>
-        ))}
       </div>
     );
   }

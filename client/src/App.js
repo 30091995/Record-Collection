@@ -5,6 +5,7 @@ import Start from './components/Start.js'
 import Profile from './components/Profile'
 import ShowArtists from './components/ShowArtists.js'
 import { Route , } from 'react-router-dom'
+import ShowReleases from './components/ShowReleases.js'
 import NavigationBar from './components/NavigationBar.js';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         loggedInUser: newUser
       })
     }
+    
 
     render () {
     return (
@@ -29,6 +31,7 @@ class App extends Component {
         <Route exact path="/searchArtist" render={() => <ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>} />
         <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
         <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
+        <Route exact path="/artist/:artistId/releases" render={({match}) => <ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>}/>
     </div>
     );
     }
