@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
 import AddRecord from './AddRecord'
+import { Spinner } from 'reactstrap';
 
 class ShowReleases extends Component {
   state = {
@@ -27,7 +27,7 @@ class ShowReleases extends Component {
             <AddRecord singleRelease={release} key={index} user={this.props.user}/>
           ))
         ) : (
-          <Spinner animation="border" variant="info"></Spinner>
+          <Spinner size="lg" color="info">Loading...</Spinner>
         )}
       </div>
     );
