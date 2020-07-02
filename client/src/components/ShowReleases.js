@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import AddRecord from './AddRecord'
 
 class ShowReleases extends Component {
   state = {
@@ -12,8 +13,9 @@ class ShowReleases extends Component {
       this.setState({
         releases: releases.data.releases.filter(
           (singleRelease) => singleRelease.type === "master"
-        ),
+        )
       });
+      console.log(this.state.releases)
     });
   }
 
@@ -21,8 +23,8 @@ class ShowReleases extends Component {
     return (
       <div>
         {this.state.releases.length > 0 ? (
-          this.state.releases.map((release) => (
-            <div key={release.id}>{release.title}</div>
+          this.state.releases.map((release, index) => (
+            <AddRecord singleRelease={release} key={index} user={this.props.user}/>
           ))
         ) : (
           <Spinner animation="border" variant="info"></Spinner>
