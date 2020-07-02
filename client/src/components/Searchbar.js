@@ -1,8 +1,11 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import Form from "react-bootstrap/Form";
+import {
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  Form,
+  Button,
+} from "reactstrap";
 
 function Searchbar(props) {
   let searchHandler = (event) => {
@@ -18,16 +21,16 @@ function Searchbar(props) {
   return (
     <Form onSubmit={sub}>
       <InputGroup className="mb-3">
-        <FormControl
+        <Input
           placeholder={props.placeholder}
-          aria-label={props.placeholder}
-          aria-describedby="basic-addon2"
           onChange={searchHandler}
           value={props.currentSearchTerm}
         />
-        <InputGroup.Append>
-          <Button variant="outline-secondary">{props.children}</Button>
-        </InputGroup.Append>
+        <InputGroupAddon addonType="append">
+          <Button outline color="secondary">
+            {props.children}
+          </Button>
+        </InputGroupAddon>
       </InputGroup>
     </Form>
   );
