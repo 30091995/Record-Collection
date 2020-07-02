@@ -3,8 +3,7 @@ const Schema   = mongoose.Schema;
 
 const recordSchema = new Schema({
   artist : String,
-  albumName: String,
-  notes : String,
+  title: String,
   imageUrl : String,
   owners : [{type: Schema.Types.ObjectId, ref: 'User'}],
 });

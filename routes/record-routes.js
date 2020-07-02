@@ -12,15 +12,38 @@ recordRoutes.get('/records', (req, res, next) => {
 })
 
 recordRoutes.post('/records', (req, res, next) => {
-  const { artist, albumName, notes, imgUrl } = req.body
-  Record.create({
-    artist,
-    albumName,
-    notes,
-    imgUrl,
-    owners : []
+  const { artist, title, imgUrl, recordId, userId } = req.body
+  Record.findOne({ title }).then((record) => {
+    if(record !== null)
+    {
+      if(record.owners.includes(userId) === false)
+      {
+        record.owners.push(userId)
+        record.save()
+      }
+      else
+      {
+        res.json({
+          saved: null
+        })
+      }
+    }
+    else if (record === null)
+    {
+      Record.create({
+        artist,
+        title,
+        imgUrl
+      })
+      .then((savedRecord) => {
+        savedRecord.owners.push(userId)
+        savedRecord.save()
+        res.json({
+          saved: savedRecord
+        })
+      })
+    }
   })
-  .then((recordToSave) => res.json(recordToSave))
 })
 
 recordRoutes.get("/searchArtist/:artistname", (req, res, next) => {

@@ -27,7 +27,7 @@ class Profile extends Component
   
   render () {
     let filtered = []
-    filtered = this.state.records.filter((record) => record.albumName.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
+    filtered = this.state.records.filter((record) => record.title.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
     return(
       <div>   
          {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
