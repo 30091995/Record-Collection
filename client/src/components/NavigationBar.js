@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarText,
+} from "reactstrap";
 
 function NavigationBar(props) {
+
+  const [collapsed, setCollapsed] = useState(true);
+  const toggleNavbar = () => setCollapsed(!collapsed);
+
   let clickHandler = () => {
     axios.post("/api/logout").then(() => {
       this.props.updateUser(null);
@@ -11,22 +23,32 @@ function NavigationBar(props) {
   };
 
   return (
-    <Navbar sticky="top" expand="md" bg="white">
-      <Navbar.Brand href="/profile">Record Stuff</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="/searchArtist">Search for a Record</Nav.Link>
-          <Nav.Link href="/">Scan a Record</Nav.Link>
-        </Nav>
-        <Nav>
-          <Navbar.Text className="d-none d-md-inline">Signed in as: {props.user.username}</Navbar.Text>
-          <Nav.Link href="/" onClick={clickHandler}>
-            Logout
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div>
+      <Navbar color="faded" expand="md" light>
+        <NavbarBrand href="/profile">Record Stuff</NavbarBrand>
+        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+        <Collapse isOpen={!collapsed} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink href="/searchArtist">Search for a Record</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/">Scan a Record</NavLink>
+            </NavItem>
+          </Nav>
+          <Nav navbar>
+              <NavbarText className="d-none d-md-inline mx-3 text-info">
+                Signed in as: {props.user.username}
+              </NavbarText>
+            <NavItem>
+              <NavLink href="/" onClick={clickHandler}>
+                Logout
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
   );
 }
 
