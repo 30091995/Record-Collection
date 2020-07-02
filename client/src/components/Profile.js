@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import SearchBar from './Searchbar'
 import RecordRow from './RecordRow'
-import NavigationBar from './NavigationBar.js'
-
 
 class Profile extends Component 
 {
