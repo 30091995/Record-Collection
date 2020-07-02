@@ -28,16 +28,24 @@ class ShowArtists extends Component {
   render() {
     return (
       <div>
-        <h3>Search Artist :</h3>
-        {this.state.artists.map((singleArtist) => <div key={singleArtist.id} ><img src={singleArtist.cover_image} alt="Pic no available" /><Link to={"/artist/" + singleArtist.id + "/releases"}>{singleArtist.title} <br /></Link> </div>) }
-
+        <h3>Search Artist:</h3>
         <SearchBar
           onSearchCallBack={this.searchHandler}
           currentSearchTerm={this.state.searchTerm}
           onSubmit={this.submitHandler}
           placeholder="Type in Artist"
-        >Search for Artist</SearchBar>
+        >
+          Search for Artist
+        </SearchBar>
 
+        {this.state.artists.map((singleArtist) => (
+          <div key={singleArtist.id}>
+            <img src={singleArtist.cover_image} alt="Pic not available" />
+            <Link to={"/artist/" + singleArtist.id + "/releases"}>
+              {singleArtist.title} <br />
+            </Link>{" "}
+          </div>
+        ))}
       </div>
     );
   }
