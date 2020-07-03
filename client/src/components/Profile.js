@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import SearchBar from './Searchbar'
 import RecordRow from './RecordRow'
+import { InputGroup, Input } from 'reactstrap'
 
 class Profile extends Component 
 {
@@ -19,9 +20,9 @@ class Profile extends Component
     })
     }
 
-  searchHandler = (search) => {
+  searchHandler = (event) => {
     this.setState({
-        searchTerm : search
+        searchTerm : event.target.value
     })
   }
   
@@ -31,7 +32,13 @@ class Profile extends Component
     return(
       <div>   
          {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
-        <SearchBar onSearchCallBack={this.searchHandler} currentSearchTerm={this.state.searchTerm} placeholder="Search">Search</SearchBar>
+        <InputGroup className="mb-3">
+        <Input
+          placeholder="Search your records"
+          onChange={this.searchHandler}
+          value={this.state.searchTerm}
+        />
+        </InputGroup>
          {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
       </div>
     )
