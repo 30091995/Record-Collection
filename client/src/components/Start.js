@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import "./Start.css";
 
@@ -9,8 +9,7 @@ class Start extends Component {
   render() {
     return this.props.user ? (
       <div>
-        You are already logged in, why don't you check out your{" "}
-        <Link to="/profile">Profile</Link>?
+        <Redirect to="/profile"></Redirect>
       </div>
     ) : (
       <Container fluid className="startFullHeight">

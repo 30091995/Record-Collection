@@ -4,7 +4,7 @@ import Login from './components/Login.js'
 import Start from './components/Start.js'
 import Profile from './components/Profile'
 import ShowArtists from './components/ShowArtists.js'
-import { Route , } from 'react-router-dom'
+import { Route, Redirect , } from 'react-router-dom'
 import ShowReleases from './components/ShowReleases.js'
 import NavigationBar from './components/NavigationBar.js';
 
@@ -20,6 +20,14 @@ class App extends Component {
         loggedInUser: newUser
       })
     }
+
+    protected = (comp) => {
+      if (this.state.loggedInUser) {
+        return comp
+      } else {
+        return <Redirect to="/login"></Redirect>
+      }
+    }
     
 
     render () {
@@ -27,11 +35,11 @@ class App extends Component {
     <div className="App">
     {this.state.loggedInUser ? <Route path="/" render={() => <NavigationBar user={this.state.loggedInUser} updateUser={this.updateUser}></NavigationBar>} /> : null }
         <Route exact path="/" render={() => <Start user={this.state.loggedInUser}/>} />
-        <Route exact path="/profile" render={() => <Profile user={this.state.loggedInUser} updateUser={this.updateUser}/>} />
-        <Route exact path="/searchArtist" render={() => <ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>} />
+        <Route exact path="/profile" render={() => this.protected(<Profile user={this.state.loggedInUser} updateUser={this.updateUser}/>)} />
+        <Route exact path="/searchArtist" render={() => this.protected(<ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>)} />
         <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
         <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
-        <Route exact path="/artist/:artistId/releases" render={({match}) => <ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>}/>
+        <Route exact path="/artist/:artistId/releases" render={({match}) => this.protected(<ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>)}/>
     </div>
     );
     }

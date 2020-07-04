@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import SearchBar from './Searchbar'
 import RecordRow from './RecordRow'
-import { InputGroup, Input } from 'reactstrap'
+import { InputGroup, Input, Row, Col } from 'reactstrap'
 
 class Profile extends Component 
 {
@@ -35,11 +35,18 @@ class Profile extends Component
   }
   
   render () {
+
     let filtered = []
     filtered = this.state.records.filter((record) => record.title.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
-    return(
-      <div>   
-         {this.props.user ? <h2>Hello {this.props.user.fullname}</h2> : ''}
+    
+    return (
+      <div>
+        <Row className="justify-content-center">
+          <Col xs="auto">
+            <h4 className="display-4">ALL YOUR RECORDS</h4>
+          </Col>
+        </Row>
+         
         <InputGroup className="mb-3">
         <Input
           placeholder="Search your records"
