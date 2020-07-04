@@ -1,9 +1,16 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const recordRoutes = express.Router()
 const Record = require("../models/record-model");
 const axios = require ('axios')
 
+
+recordRoutes.use((req, res, next) => {
+  if (req.isAuthenticated() /* && req.user.verifiedEmail === true */) {
+    next();
+  } else {
+    res.status(402).json({message: "Please login to view this content" });
+  }
+});
 
 recordRoutes.get('/records', (req, res, next) => {
   Record.find().then( allRecords => {
