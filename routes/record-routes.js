@@ -4,6 +4,7 @@ const Record = require("../models/record-model");
 const axios = require ('axios')
 
 
+
 recordRoutes.use((req, res, next) => {
   if (req.isAuthenticated() /* && req.user.verifiedEmail === true */) {
     next();
@@ -19,7 +20,7 @@ recordRoutes.get('/records', (req, res, next) => {
 })
 
 recordRoutes.post('/records', (req, res, next) => {
-  const { artist, title, imgUrl, recordId, userId } = req.body
+  const { artist, title, imgUrl, recordMainRelease, userId } = req.body
   Record.findOne({ title }).then((record) => {
     if(record !== null)
     {
@@ -40,7 +41,8 @@ recordRoutes.post('/records', (req, res, next) => {
       Record.create({
         artist,
         title,
-        imgUrl
+        imgUrl,
+        recordMainRelease
       })
       .then((savedRecord) => {
         savedRecord.owners.push(userId)
@@ -79,12 +81,26 @@ recordRoutes.get("/showReleases/:artistId", (req, res, next) => {
 
 recordRoutes.put("/deleterecord/:recordTitle", (req, res, next) => {
   const recordTitle = req.params.recordTitle
-  console.log(recordTitle)
   Record.findOneAndUpdate({title :recordTitle }, { $pull : {owners : req.user.id}})
-  .then((record) => {
+  .then(() => {
     console.log("Done")
   })
 })
+
+recordRoutes.get("/showSingleRelease/:releaseNumber", (req, res, next) => {
+
+  const releaseNumber = req.params.releaseNumber
+  let url = "https://api.discogs.com/releases/" + releaseNumber + 
+  `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`;
+
+  axios
+  .get(url)
+  .then((release) => {
+    res.json(release.data)
+  })
+
+})
+
 module.exports = recordRoutes
 
 
