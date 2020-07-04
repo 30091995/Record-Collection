@@ -14,6 +14,7 @@ recordRoutes.get('/records', (req, res, next) => {
 recordRoutes.post('/records', (req, res, next) => {
   const { artist, title, imgUrl, recordId, userId } = req.body
   Record.findOne({ title }).then((record) => {
+    console.log(req.user.id)
     if(record !== null)
     {
       if(record.owners.includes(userId) === false)
@@ -69,6 +70,15 @@ recordRoutes.get("/showReleases/:artistId", (req, res, next) => {
     res.json(response.data)
   })
 })
+
+
+/*recordRoutes.delete("/deleterecord/:recordId", (req, res, next) => {
+  const recordId = req.params.id
+  Record.findByIdAndUpdate(recordId , { $pull : {owners : req.user.id}})
+  .then((record) => {
+    console.log(record)
+  })
+}) */
 
 module.exports = recordRoutes
 
