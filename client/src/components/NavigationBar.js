@@ -30,7 +30,7 @@ function NavigationBar(props) {
         <Collapse isOpen={!collapsed} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/searchArtist">Search for a Record</NavLink>
+              <NavLink href="/searchArtist">Search for Artist</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/">Scan a Record</NavLink>
