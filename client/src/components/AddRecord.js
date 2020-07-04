@@ -34,6 +34,7 @@ class AddRecord extends Component {
       {this.props.singleRelease.title}
       <br />
       <button onClick={this.saveRecord}>Add to your collection</button>
+      {this.props.singleRelease.id}
        </div>
      )
    }

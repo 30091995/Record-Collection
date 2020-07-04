@@ -75,7 +75,7 @@ recordRoutes.put("/deleterecord/:recordTitle", (req, res, next) => {
   console.log(recordTitle)
   Record.findOneAndUpdate({title :recordTitle }, { $pull : {owners : req.user.id}})
   .then((record) => {
-    console.log(record)
+    console.log("Done")
   })
 })
 module.exports = recordRoutes
