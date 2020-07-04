@@ -8,7 +8,8 @@ class Profile extends Component
 {
     state = {
     searchTerm: "",
-    records: []
+    records: [],
+    collectionUpdated : false
     }
 
   componentDidMount () {
@@ -25,6 +26,13 @@ class Profile extends Component
         searchTerm : event.target.value
     })
   }
+
+  removeOneRecord = (title) => {
+    let newArr = this.state.records.filter((record) => record.title !== title)
+    this.setState({
+      records: newArr
+    })
+  }
   
   render () {
     let filtered = []
@@ -39,7 +47,7 @@ class Profile extends Component
           value={this.state.searchTerm}
         />
         </InputGroup>
-         {filtered.map((record) => <RecordRow key={record._id} record={record} />)}
+         {filtered.map((record) => <RecordRow key={record._id} record={record} removeHandler={this.removeOneRecord} />)}
       </div>
     )
   }
