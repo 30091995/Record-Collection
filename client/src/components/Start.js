@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import "./Start.css";
 
@@ -9,27 +9,31 @@ class Start extends Component {
   render() {
     return this.props.user ? (
       <div>
-        You are already logged in, why don't you check out your{" "}
-        <Link to="/profile">Profile</Link>?
+        <Redirect to="/profile"></Redirect>
       </div>
     ) : (
-      <Row fluid className="startFullHeight">
-        <Col sm="auto" className="align-self-center">
-          <Row>
-            <Col className="text-center">
-              <h1 className="display-3 display-1-md text-white">RECORD BOX</h1>
+      <Container fluid className="startFullHeight">
+        <Row className="h-100 align-items-center justify-content-center">
+          <Col xs="10" md="auto" className="fadeIn text-center">
+            <Col className="display-4 text-dark">RECORD BOX</Col>
+            <Col className="h5 text-dark text-monospace my-4">
+              Easily manage and track all your vinyl
             </Col>
-          </Row>
-          <Row className="text-center">
-            <Col>
-              <Link to="/signup">Signup</Link>
-            </Col>
-            <Col>
-              <Link to="/login">Login</Link>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+            <Row className="my-4 justify-content-center">
+              <Col xs="auto">
+                <Link className="text-info" to="/login">
+                  Login
+                </Link>
+              </Col>
+              <Col xs="auto">
+                <Link className="text-info" to="/signup">
+                  Signup
+                </Link>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

@@ -1,14 +1,14 @@
-.startFullHeight {
+.loginFullHeight {
   height: 100vh;
   background-color:black;
 }
 
-.fadeIn {
-  animation: fadein 2s ease-out;
+.loginFadeIn {
+  animation: fadein 0.5s ease-out;
   border-radius: 10px;
 }
 
-@keyframes fadein {
+@keyframes loginFadein {
   from {opacity: 0}
   to {opacity: 1}
   }

@@ -11,7 +11,7 @@ class ShowArtists extends Component {
 
   searchHandler = (search) => {
     this.setState({
-      searchTerm: search,
+      searchTerm: search
     });
   };
 

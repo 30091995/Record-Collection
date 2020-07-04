@@ -77,6 +77,14 @@ recordRoutes.get("/showReleases/:artistId", (req, res, next) => {
   })
 })
 
+recordRoutes.put("/deleterecord/:recordTitle", (req, res, next) => {
+  const recordTitle = req.params.recordTitle
+  console.log(recordTitle)
+  Record.findOneAndUpdate({title :recordTitle }, { $pull : {owners : req.user.id}})
+  .then((record) => {
+    console.log(record)
+  })
+})
 module.exports = recordRoutes
 
 
