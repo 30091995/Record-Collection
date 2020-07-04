@@ -21,7 +21,6 @@ class ShowArtists extends Component {
         searchTerm: "",
         artists: response.data.filter((res) => res.type === "artist"),
       });
-      console.log(this.state.artists);
     });
   };
 
@@ -43,7 +42,7 @@ class ShowArtists extends Component {
             <img src={singleArtist.cover_image} alt="Pic not available" />
             <Link to={"/artist/" + singleArtist.id + "/releases"}>
               {singleArtist.title} <br />
-            </Link>{" "}
+            </Link>
           </div>
         ))}
       </div>

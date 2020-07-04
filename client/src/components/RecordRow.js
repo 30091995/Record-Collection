@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 
 
 function RecordRow(props) {
@@ -16,7 +16,8 @@ function RecordRow(props) {
 
   return (
     <div>
-      {props.record.artist} {props.record.title}
+      {props.record.artist}<br />
+      <Link to={'/showRelease/' + props.record.recordMainRelease}>{props.record.title}</Link>
       <br></br>
       <img src={props.record.imgUrl} />
       <br />
