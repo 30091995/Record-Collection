@@ -29,6 +29,9 @@ function NavigationBar(props) {
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav className="mr-auto" navbar>
+          <NavItem>
+              <NavLink href="/">Your Collection</NavLink>
+            </NavItem>
             <NavItem>
               <NavLink href="/searchArtist">Search for Artist</NavLink>
             </NavItem>

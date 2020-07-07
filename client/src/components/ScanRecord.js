@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './ScanRecord.css'
 import axios from "axios";
 import { InputGroup, Input, Row, Col, Button } from "reactstrap";
 import Quagga from "quagga";
@@ -25,10 +26,10 @@ class ScanRecord extends Component {
         },
         locate: true,
         decoder: {
-          readers: ["ean_reader"],
+          readers: ["ean_reader", "code_128_reader", "upc_reader"]
         },
         locator: {
-          halfSample: true,
+          halfSample: false,
         },
       },
       function (err) {
@@ -62,14 +63,21 @@ class ScanRecord extends Component {
     return (
       <Col>
         <h3>Scan a Record</h3>
+        <h5>Scan the Barcode of your record to add it to your collection</h5>
         {!this.state.scanResult ? (
           <Col>
-            <Col id="vid"></Col>
+            <div id="vid"></div>
           </Col>
         ) : (
           <Col>
+          <Row>
             Results for scanned code {this.state.scanResult} are:
-            {this.state.apiAnswer.map(r => <Col>{r.title} -- <img src={r.thumb}></img> </Col>)}
+            </Row>
+            <Row>
+            
+            {this.state.apiAnswer.map(r => <Col className="col-4" ><img src={r.thumb}></img>{r.title}</Col>)}
+            
+            </Row>
           </Col>
         )}
       </Col>
