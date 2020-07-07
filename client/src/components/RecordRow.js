@@ -1,6 +1,11 @@
 import React from "react";
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import './RecordRow.css'
+import {
+  Card, CardImg, CardText, CardDeck, CardBody,
+  CardTitle, CardSubtitle, Button, CardLink
+} from 'reactstrap';
 
 
 function RecordRow(props) {
@@ -15,14 +20,13 @@ function RecordRow(props) {
 
 
   return (
-    <div>
-      {props.record.artist}<br />
-      <Link to={'/showRelease/' + props.record.recordMainRelease}>{props.record.title}</Link>
-      <br></br>
-      <img src={props.record.imgUrl} />
-      <br />
-      <button onClick={removeRecordCallBack}>Remove from collection</button>
-    </div>
+      <Card className="m-3 shadow">
+        <CardImg top width="100%" className="imgSize" src={props.record.imgUrl} />
+        <CardTitle>{props.record.artist}</CardTitle>
+        <CardSubtitle>{props.record.title}</CardSubtitle>
+        <CardLink href={'/showRelease/' + props.record.recordMainRelease}>{props.record.title}</CardLink>
+        <Button outline inverted color="danger" onClick={removeRecordCallBack}>Remove from collection</Button>
+      </Card>
   );
 }
 

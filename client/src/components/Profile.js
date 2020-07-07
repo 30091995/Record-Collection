@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import SearchBar from './Searchbar'
 import RecordRow from './RecordRow'
-import { InputGroup, Input, Row, Col } from 'reactstrap'
+import { InputGroup, CardGroup, Container, Input, Row, Col, CardDeck } from 'reactstrap'
 
 class Profile extends Component 
 {
@@ -39,22 +39,26 @@ class Profile extends Component
     filtered = this.state.records.filter((record) => record.title.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()))
     
     return (
-      <div>
+      <Container fluid>
         <Row className="justify-content-center">
-          <Col xs="auto">
+          <Col xs="auto" className="text-center">
             <h4 className="display-4">ALL YOUR RECORDS</h4>
           </Col>
         </Row>
          
-        <InputGroup className="mb-3">
+        <InputGroup>
         <Input
-          placeholder="Search your records"
+          placeholder="Search your record collection"
           onChange={this.searchHandler}
           value={this.state.searchTerm}
         />
         </InputGroup>
+
+        <Row xs="12" className="justify-content-center">
          {filtered.map((record) => <RecordRow key={record._id} record={record} removeHandler={this.removeOneRecord} />)}
-      </div>
+         </Row>
+
+      </Container>
     )
   }
 }
