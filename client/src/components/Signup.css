@@ -1,0 +1,14 @@
+.signupFullHeight {
+  height: 100vh;
+  background-color:black;
+}
+
+.signupFadeIn {
+  animation: fadein 0.5s ease-out;
+  border-radius: 10px;
+}
+
+@keyframes signupFadein {
+  from {opacity: 0}
+  to {opacity: 1}
+  }
