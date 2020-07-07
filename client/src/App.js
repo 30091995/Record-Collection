@@ -8,6 +8,7 @@ import { Route, Redirect , } from 'react-router-dom'
 import ShowReleases from './components/ShowReleases.js'
 import NavigationBar from './components/NavigationBar.js';
 import ScanRecord from './components/ScanRecord.js';
+import SingleRelease from './components/SingleRelease.js'
 
 class App extends Component {
 
@@ -41,7 +42,11 @@ class App extends Component {
         <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
         <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
         <Route exact path="/artist/:artistId/releases" render={({match}) => this.protected(<ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>)}/>
+                                                                                           
         <Route exact path="/scan" render={() => <ScanRecord user={this.state.loggedInUser}/>} />
+
+        <Route exact path="/showRelease/:releaseNumber" render={({match}) => <SingleRelease user={this.state.loggedInUser} updateUser={this.updateUser} releaseNumber={match.params.releaseNumber} />} />
+
     </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom' 
 
 class AddRecord extends Component {
 
@@ -12,9 +13,9 @@ class AddRecord extends Component {
     const title = this.props.singleRelease.title
     const imgUrl = this.props.singleRelease.thumb
     const userId = this.props.user._id
-    const recordId = this.props.singleRelease.id
+    const recordMainRelease = this.props.singleRelease.main_release
     console.log(userId)
-    axios.post('/api/records', { artist, title, imgUrl, userId , recordId}).then((response) => {
+    axios.post('/api/records', { artist, title, imgUrl, userId , recordMainRelease}).then((response) => {
       if(response.data !== null)
       {
         this.setState({
@@ -31,8 +32,7 @@ class AddRecord extends Component {
         {this.state.saved ? "Saved" : ""}
       <img src={this.props.singleRelease.thumb} />
       <br />
-      {this.props.singleRelease.title}
-      <br />
+      <Link to={"/showRelease/" + this.props.singleRelease.main_release }>{this.props.singleRelease.title}</Link>
       <button onClick={this.saveRecord}>Add to your collection</button>
        </div>
      )

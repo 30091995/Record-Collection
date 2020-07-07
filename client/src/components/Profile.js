@@ -9,7 +9,6 @@ class Profile extends Component
     state = {
     searchTerm: "",
     records: [],
-    collectionUpdated : false
     }
 
   componentDidMount () {
