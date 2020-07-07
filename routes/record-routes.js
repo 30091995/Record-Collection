@@ -101,6 +101,18 @@ recordRoutes.get("/showSingleRelease/:releaseNumber", (req, res, next) => {
 
 })
 
+// scanRecod route
+recordRoutes.get("/scanRecord/:barcode", (req, res, next) => {
+  axios
+    .get(
+      `https://api.discogs.com/database/search?&key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}&barcode=` +
+        req.params.barcode
+    )
+    .then((response) => {
+      res.json(response.data.results);
+    });
+});
+
 module.exports = recordRoutes
 
 

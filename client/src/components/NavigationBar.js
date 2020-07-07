@@ -33,7 +33,7 @@ function NavigationBar(props) {
               <NavLink href="/searchArtist">Search for Artist</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">Scan a Record</NavLink>
+              <NavLink href="/scan">Scan a Record</NavLink>
             </NavItem>
           </Nav>
           <Nav navbar>
