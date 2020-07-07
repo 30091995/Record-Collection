@@ -108,7 +108,6 @@ class Login extends Component {
       <Container fluid className="loginFullHeight">
         {this.renderRedirect()}
         {this.state.errorMessage ? <h1>{this.state.errorMessage}</h1> : null}
-
         {loginForm}
       </Container>
     );
