@@ -40,6 +40,7 @@ class Profile extends Component
     
     return (
       <Container fluid>
+        {this.props.user.verifiedEmail ? " ": <h3>Don't forget to verify your e-mail</h3> }
         <Row className="justify-content-center">
           <Col xs="auto" className="text-center">
             <h4 className="display-4">ALL YOUR RECORDS</h4>
