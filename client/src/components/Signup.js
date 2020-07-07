@@ -21,7 +21,8 @@ class Signup extends Component {
     password: "",
     username: "",
     fullname: "",
-    redirect: false
+    redirect: false,
+    error: null
   };
 
   // you can use for every input field
@@ -49,7 +50,15 @@ class Signup extends Component {
           fullname: "",
           redirect: true,
         });
-      });
+      })
+      .catch((err) => {
+        if(err.response.data !== null)
+        {
+          this.setState({
+            error: err.response.data.message
+          })
+        }
+      })
   };
 
   renderRedirect = () => {
@@ -129,8 +138,8 @@ class Signup extends Component {
     )
 
     return (
-
       <Container fluid className="signupFullHeight">
+        {this.state.error ? <h1>{this.state.error}</h1> : ""}
       {this.renderRedirect()}
       {signupForm}
     </Container>

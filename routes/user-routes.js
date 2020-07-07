@@ -41,8 +41,11 @@ userRoutes.post('/signup', (req, res, next) => {
   .then((u) => {
     if (u !== null)
     {
-      //res.redirect('/signup') // username already exists
+      res.status(400).json({
+        message : "Username already exists"
+      })
       throw new Error('Username already exists')
+
     }
     return User.findOne({ email })
   })
@@ -50,7 +53,9 @@ userRoutes.post('/signup', (req, res, next) => {
 
     if (u !== null)
     {
-      //res.redirect('/signup') // email already exists
+      res.status(400).json({
+        message : "Email already exists"
+      }) // email already exists
       throw new Error('Email already exists')
     }
     return transporter.sendMail({
