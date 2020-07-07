@@ -1,6 +1,10 @@
 const express = require('express');
 const userRoutes = express.Router();
 
+//for the email verification 
+
+const nodemailer = require('nodemailer')
+
 //Put passport variables here
 
 const passport = require('passport');
@@ -11,6 +15,16 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/user-model.js')
 
+
+// SMTP 
+let transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'hackgeorges6@gmail.com',
+    pass: 'iron_georges123',
+  }
+});
+
 // POST /api/signup (This route sign up a user in the database)
 
 userRoutes.post('/signup', (req, res, next) => {
@@ -19,11 +33,15 @@ userRoutes.post('/signup', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
+  // creates a 4 digit random token
+  const tokenArr = Array.from({ length: 6 }, () => Math.floor(Math.random() * 10))
+  const token = tokenArr.join(''); // 6 digits
+
   User.findOne({ username })
   .then((u) => {
     if (u !== null)
     {
-      res.redirect('/signup') // username already exists
+      //res.redirect('/signup') // username already exists
       throw new Error('Username already exists')
     }
     return User.findOne({ email })
@@ -32,9 +50,17 @@ userRoutes.post('/signup', (req, res, next) => {
 
     if (u !== null)
     {
-      res.redirect('/signup') // email already exists
+      //res.redirect('/signup') // email already exists
       throw new Error('Email already exists')
     }
+    return transporter.sendMail({
+      from: '"Recordbox" <myawesome@project.com>',
+      to: email,
+      subject: 'Email verification token',
+      text: `Hey, thanks for joining recordbox! Click the link to confirm your mail adress: ${process.env.EMAIL_LINK}/${token}`,
+      html: `Hey, thanks for joining recordbox! Click the link to confirm your mail adress: ${process.env.EMAIL_LINK}/${token}`
+  
+    })
   })
   .then(() => {
     const salt = bcrypt.genSaltSync(10);
@@ -44,7 +70,8 @@ userRoutes.post('/signup', (req, res, next) => {
       email: email,
       password: hashPass,
       username: username,
-      fullname: fullname
+      fullname: fullname,
+      token : token
     });
 
 
@@ -100,6 +127,16 @@ userRoutes.get('/checkuser', (req, res, next) => {
     res.json({ userDoc: null });
   }
 });
+
+userRoutes.get('/verify-email-link/:token',(req, res, next) => {
+  if (req.user.token === req.params.token) {
+    req.user.verifiedEmail = true
+    req.user.save().then(() => {
+      // res.redirect to React App
+      res.redirect('http://localhost:3000/profile')
+    })
+  }
+})
 
 module.exports = userRoutes
 
