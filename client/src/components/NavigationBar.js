@@ -24,7 +24,7 @@ function NavigationBar(props) {
 
   return (
     <div>
-      <Navbar color="faded" expand="md" light>
+      <Navbar color="white" expand="md" light fixed="top" className="border-bottom border-faded rounded-bottom">
         <NavbarBrand href="/profile">Record Stuff</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
