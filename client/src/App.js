@@ -11,6 +11,7 @@ import ScanRecord from './components/ScanRecord.js';
 import SingleRelease from './components/SingleRelease.js'
 import VerifyEmail from './components/VerifyEmail.js'
 
+
 class App extends Component {
 
   state = {

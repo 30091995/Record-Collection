@@ -5,6 +5,7 @@ import "./RecordRow.css";
 import {
   Card,
   Col,
+  Row,
   CardImg,
   CardText,
   CardDeck,
@@ -48,23 +49,34 @@ function RecordRow(props) {
     //     </Button>
     //   </CardFooter>
     // </Card>
+    <div className="card-group">
+      <div className="card shadow m-3 border-secondary" style={{ width: "200px" }} id="st">
+        <div
+          id="imgSize"
+          style={{ backgroundImage: `url("${props.record.imgUrl}"` }}
+        />
+        <div className="card-body">
+          <h6 className="card-title">{props.record.artist}</h6>
+          <p className="text-muted">{props.record.title}</p>
+        </div>
 
-    <div className="card " style={{ width: "150px" }}>
-      <div id="imgSize" style={{ backgroundImage: `url("${props.record.imgUrl}"` }} />
-      <div className="card-body">
-        <h5 className="card-title">{props.record.artist}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">{props.record.title}</h6>
-        <Link className="card-link" to={"/showRelease/" + props.record.recordMainRelease}>
-          Show Release
-        </Link>
-        <Button outline inverted color="danger" onClick={removeRecordCallBack}>
-       Remove
-      </Button>
+        <div className="card-footer bg-light">
+          <Link
+            className="badge badge-info mx-1"
+            to={"/showRelease/" + props.record.recordMainRelease}
+          >
+            Show Release
+          </Link>
+
+          <Link
+            className="card-link badge badge-danger mx-1"
+            onClick={removeRecordCallBack}
+          >
+            Remove
+          </Link>
+        </div>
       </div>
     </div>
-
-
-
   );
 }
 

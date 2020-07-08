@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import './Profile.css';
 import SearchBar from "./Searchbar";
 import RecordRow from "./RecordRow";
 import {
@@ -20,7 +21,7 @@ class Profile extends Component {
 
   componentDidMount() {
     axios.get("/api/records").then((allRecords) => {
-      console.log(allRecords.data)
+      console.log(allRecords.data);
       this.setState({
         records: allRecords.data.filter((record) =>
           record.owners.includes(this.props.user._id)
@@ -52,37 +53,39 @@ class Profile extends Component {
     );
 
     return (
-
       <Container fluid className="mt-5">
-        {this.props.user.verifiedEmail ? " ": <h3>Don't forget to verify your e-mail</h3> }
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-            <h4 className="display-4">ALL YOUR RECORDS</h4>
+
+            {this.props.user.verifiedEmail ? (
+          " "
+        ) : (
+          <div className="alert alert-warning">Don't forget to verify your e-mail</div>
+        )}
+        <h4 className="display-4 text-light">ALL YOUR RECORDS</h4>
           </Col>
         </Row>
 
         <Row className="justify-content-center">
-        <Col xs="12" md="8" className="my-4">
-        <InputGroup>
-            <Input
-              placeholder="Search your record collection"
-              onChange={this.searchHandler}
-              value={this.state.searchTerm}
-            />
-          </InputGroup>
-
-        </Col>
-         
+          <Col xs="12" md="8" className="my-4">
+            <InputGroup>
+              <Input
+                placeholder="Search your record collection"
+                onChange={this.searchHandler}
+                value={this.state.searchTerm}
+              />
+            </InputGroup>
+          </Col>
         </Row>
-
-        <Row xs="12" className="justify-content-center">
-          {filtered.map((record) => (
-            <RecordRow
-              key={record._id}
-              record={record}
-              removeHandler={this.removeOneRecord}
-            />
-          ))}
+        
+        <Row className="justify-content-center">
+        {filtered.map((record) => (
+          <RecordRow
+            key={record._id}
+            record={record}
+            removeHandler={this.removeOneRecord}
+          />
+        ))}
         </Row>
       </Container>
     );

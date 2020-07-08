@@ -1,6 +1,11 @@
 #imgSize {
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: top;
   height: 150px;
-  overflow-x: hidden;
+  min-width: 150px;
+}
+
+#st {
+  border-width: 2px;
 }

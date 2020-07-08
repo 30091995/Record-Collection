@@ -23,9 +23,8 @@ function NavigationBar(props) {
   };
 
   return (
-    <div>
-      <Navbar color="white" expand="md" light fixed="top" className="border-bottom border-faded rounded-bottom">
-        <NavbarBrand href="/profile">Record Stuff</NavbarBrand>
+      <Navbar color="light" expand="lg" light fixed="top" className="border-bottom border-faded rounded-bottom">
+        <NavbarBrand href="/profile">Record Box</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav className="mr-auto" navbar>
@@ -40,18 +39,17 @@ function NavigationBar(props) {
             </NavItem>
           </Nav>
           <Nav navbar>
-              <NavbarText className="d-none d-md-inline mx-3 text-info">
-                Signed in as: {props.user.username}
+              <NavbarText className="d-none d-lg-inline mx-3">Signed in as:
+                <span className="text-info"> {props.user.username}</span>
               </NavbarText>
             <NavItem>
-              <NavLink href="/" onClick={clickHandler}>
+              <NavLink className="text-danger" href="/" onClick={clickHandler}>
                 Logout
               </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
   );
 }
 
