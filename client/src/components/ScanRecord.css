@@ -1,0 +1,4 @@
+/* this is putting the canvas on top of the camera stream*/
+.drawingBuffer {
+  margin-top: -480px;
+}
