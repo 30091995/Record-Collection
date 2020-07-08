@@ -18,7 +18,7 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    errorMessage: "",
+    errorMessage: null,
     redirect: false,
   };
 
@@ -49,8 +49,6 @@ class Login extends Component {
         this.setState({ email: "", password: "", redirect: true });
       })
       .catch((error) => {
-        console.log("ERROR !!");
-        console.log(error.response);
         this.setState({
           errorMessage: error.response.data.message,
         });

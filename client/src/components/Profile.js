@@ -52,10 +52,12 @@ class Profile extends Component {
     );
 
     return (
+
       <Container fluid className="mt-5">
+        {this.props.user.verifiedEmail ? " ": <h3>Don't forget to verify your e-mail</h3> }
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-            <Col className="display-4">ALL YOUR RECORDS</Col>
+            <h4 className="display-4">ALL YOUR RECORDS</h4>
           </Col>
         </Row>
 
