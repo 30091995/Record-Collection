@@ -57,7 +57,7 @@ class Profile extends Component {
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
 
-            {this.props.user.verifiedEmail ? (
+            {!this.props.email || this.props.user.verifiedEmail ? (
           " "
         ) : (
           <div className="alert alert-warning">Don't forget to verify your e-mail</div>

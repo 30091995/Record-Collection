@@ -7,6 +7,7 @@ const userSchema = new Schema ({
   fullname : String,
   password : String,
   token: String,
+  googleID: String,
   verifiedEmail: { type: Boolean, default: false }
 })
 
