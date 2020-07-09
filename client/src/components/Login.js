@@ -21,17 +21,14 @@ class Login extends Component {
     password: "",
     errorMessage: null,
     redirect: false,
-    visible: true
   };
 
-  setVisible = (bool) => {
+  // for error alert
+  onDismiss = () => {
     this.setState({
-      visible: bool
-    })
-  }
-
-  onDismiss = () => this.setVisible(false);
-
+      errorMessage: null,
+    });
+  };
 
   renderRedirect = () => {
     if (this.state.redirect) {
@@ -66,55 +63,82 @@ class Login extends Component {
       });
   };
 
-
   render() {
-    
     let loginForm = (
       <Row className="h-100 align-items-center justify-content-center loginFadeIn">
-      <Col xs="10" sm="6">
-        <Form onSubmit={this.handleSubmit}>
-          <FormText className="my-4">
-              <h2 className="h2"><span>Login</span></h2>
-              {this.state.errorMessage ? <Alert isOpen={this.state.visible} toggle={this.onDismiss} color="danger">{this.state.errorMessage}</Alert> : null}
+        <Col xs="10" sm="6">
+          <Form onSubmit={this.handleSubmit}>
+            <FormText className="my-4">
+              <h2 className="h2">
+                <span>Login</span>
+              </h2>
             </FormText>
+            {this.state.errorMessage ? (
+              <Alert toggle={this.onDismiss} color="danger">
+                {this.state.errorMessage}
+              </Alert>
+            ) : null}
             <br></br>
-          <FormGroup>
-            <Label className="text-info">E-mail</Label>
-            <Input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label className="text-info">E-mail</Label>
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label className="text-info">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label className="text-info">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Button outline inverted color="info" type="submit" className="my-2">
-              Login
-            </Button>
-          </FormGroup>
+            <FormGroup>
+              <Row>
+                <Col xs="auto">
+                  <Button
+                    outline
+                    inverted
+                    color="info"
+                    type="submit"
+                    className="my-2"
+                  >
+                    Login
+                  </Button>
+                </Col>
+                <Col xs="auto">
+                  <Button
+                    outline
+                    inverted
+                    color="info"
+                    href="http://localhost:5555/api/auth/google"
+                    className="my-2 nowrap"
+                  >
+                    Login with Google
+                  </Button>
+                </Col>
+              </Row>
+            </FormGroup>
 
-          <FormText>Not signed up yet? <Link to="/signup" className="text-info">Signup here</Link>.
-
-          </FormText>
-
-        </Form>
+            <FormText>
+              Not signed up yet?{" "}
+              <Link to="/signup" className="text-info">
+                Signup here
+              </Link>
+              .
+            </FormText>
+          </Form>
         </Col>
       </Row>
     );
-    
 
     return (
       <Container fluid className="loginFullHeight">
