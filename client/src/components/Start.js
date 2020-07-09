@@ -12,10 +12,10 @@ class Start extends Component {
         <Redirect to="/profile"></Redirect>
       </div>
     ) : (
-      <Container fluid className="startFullHeight">
+      <Container fluid className="startFullHeight fadeIn">
         <Row className="h-100 align-items-center justify-content-center">
           <Col xs="10" md="auto" className="fadeIn text-center">
-            <Col className="display-4 text-dark">RECORD BOX</Col>
+            <Col className="display-4 text-info">RECORD BOX</Col>
             <Col className="h5 text-dark text-monospace my-4">
               Easily manage and track all your vinyl
             </Col>

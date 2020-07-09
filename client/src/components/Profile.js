@@ -8,6 +8,7 @@ import {
   Row,
   Col,
   CardDeck,
+  CardColumns,
 } from "reactstrap";
 
 class Profile extends Component {

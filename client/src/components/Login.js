@@ -4,6 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import "./Login.css";
 import {
   Container,
+  Alert,
   Row,
   Col,
   Form,
@@ -20,7 +21,17 @@ class Login extends Component {
     password: "",
     errorMessage: null,
     redirect: false,
+    visible: true
   };
+
+  setVisible = (bool) => {
+    this.setState({
+      visible: bool
+    })
+  }
+
+  onDismiss = () => this.setVisible(false);
+
 
   renderRedirect = () => {
     if (this.state.redirect) {
@@ -55,16 +66,18 @@ class Login extends Component {
       });
   };
 
+
   render() {
+    
     let loginForm = (
       <Row className="h-100 align-items-center justify-content-center loginFadeIn">
       <Col xs="10" sm="6">
         <Form onSubmit={this.handleSubmit}>
           <FormText className="my-4">
-              <h2>Login</h2>
+              <h2 className="h2"><span>Login</span></h2>
+              {this.state.errorMessage ? <Alert isOpen={this.state.visible} toggle={this.onDismiss} color="danger">{this.state.errorMessage}</Alert> : null}
             </FormText>
             <br></br>
-
           <FormGroup>
             <Label className="text-info">E-mail</Label>
             <Input
@@ -101,11 +114,11 @@ class Login extends Component {
         </Col>
       </Row>
     );
+    
 
     return (
       <Container fluid className="loginFullHeight">
         {this.renderRedirect()}
-        {this.state.errorMessage ? <h1>{this.state.errorMessage}</h1> : null}
         {loginForm}
         <a href="http://localhost:5555/api/auth/google">Log in W google</a>
       </Container>
