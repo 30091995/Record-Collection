@@ -50,7 +50,7 @@ function RecordRow(props) {
     //   </CardFooter>
     // </Card>
     <div className="card-group">
-      <div className="card shadow m-3 border-secondary" style={{ width: "200px" }} id="st">
+      <div className="card shadow m-2 border-secondary" style={{ width: "150px" }} id="st">
         <div
           id="imgSize"
           style={{ backgroundImage: `url("${props.record.imgUrl}"` }}
