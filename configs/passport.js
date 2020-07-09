@@ -1,6 +1,8 @@
 const User = require('../models/user-model');
 
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
 const bcrypt = require('bcryptjs'); // !!!
 const passport = require('passport');
 
@@ -40,3 +42,34 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, nex
     next(null, foundUser);
   });
 }));
+
+
+//Google strategy for passport
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/api/auth/google/callback"
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // to see the structure of the data in received response:
+      console.log("Google account details:", profile);
+ 
+      User.findOne({ googleID: profile.id })
+        .then(user => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+ 
+          User.create({ googleID: profile.id , username : profile.displayName})
+            .then(newUser => {
+              done(null, newUser);
+            })
+            .catch(err => done(err)); // closes User.create()
+        })
+        .catch(err => done(err)); // closes User.findOne()
+    }
+  )
+);

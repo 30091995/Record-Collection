@@ -107,6 +107,7 @@ class Login extends Component {
         {this.renderRedirect()}
         {this.state.errorMessage ? <h1>{this.state.errorMessage}</h1> : null}
         {loginForm}
+        <a href="http://localhost:5555/api/auth/google">Log in W google</a>
       </Container>
     );
   }

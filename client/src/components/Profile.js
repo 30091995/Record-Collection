@@ -49,6 +49,7 @@ class Profile extends Component {
         .includes(this.state.searchTerm.toLocaleLowerCase())
     );
 
+    
     return (
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">

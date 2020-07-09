@@ -138,10 +138,29 @@ userRoutes.get('/verify-email-link/:token',(req, res, next) => {
     req.user.verifiedEmail = true
     req.user.save().then(() => {
       // res.redirect to React App
-      res.redirect('http://localhost:3000/profile')
+      res.redirect(`${process.env.FRONT_END}/profile`)
     })
   }
 })
+
+
+// Route for google
+userRoutes.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+userRoutes.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: `${process.env.FRONT_END}/profile`,
+    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+  })
+);
 
 module.exports = userRoutes
 
