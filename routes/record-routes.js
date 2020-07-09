@@ -28,6 +28,9 @@ recordRoutes.post('/records', (req, res, next) => {
       {
         record.owners.push(userId)
         record.save()
+        res.json({
+          saved : record
+        })
       }
       else
       {

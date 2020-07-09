@@ -44,11 +44,11 @@ class Profile extends Component {
 
   render() {
     let filtered = [];
-    filtered = this.state.records.filter((record) =>
-      record.title
-        .toLowerCase()
-        .includes(this.state.searchTerm.toLocaleLowerCase())
-    );
+    filtered = this.state.records.filter((record) => {
+      return (record.title.toLowerCase().includes(this.state.searchTerm.toLocaleLowerCase()) ||
+      record.artist.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+      )
+    });
 
     
     return (
