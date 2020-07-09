@@ -43,13 +43,12 @@ class ScanRecord extends Component {
     );
 
     Quagga.onProcessed(result => {
-      console.log("processed", result);
+
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
 
       if (result) {
         if (result.boxes) {
-          console.log("result boxes", Quagga.canvas.ctx.overlay);
           drawingCtx.clearRect(
             0,
             0,
@@ -61,7 +60,7 @@ class ScanRecord extends Component {
               return box !== result.box;
             })
             .forEach(function(box) {
-              console.log("bla", box);
+
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
                 lineWidth: 2,
@@ -91,8 +90,6 @@ class ScanRecord extends Component {
       if (data) {
         Quagga.stop();
         axios.get("/api/scanRecord/" + data.codeResult.code).then((response) => {
-          console.log("Scanned code Api result array: " + response.data);
-
 
           this.setState({
             scanResult: data.codeResult.code,
@@ -106,7 +103,7 @@ class ScanRecord extends Component {
   render() {
 
     return (
-      <Col>
+      <Col className="marginTop">
         <h3>Scan a Record</h3>
         <h5>Scan the Barcode of your record to add it to your collection</h5>
         {!this.state.scanResult ? (

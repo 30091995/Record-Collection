@@ -10,6 +10,7 @@ import {
   NavLink,
   NavbarText,
 } from "reactstrap";
+import { NavLink as RRNavLink } from 'react-router-dom';
 
 function NavigationBar(props) {
   const [collapsed, setCollapsed] = useState(true);
@@ -20,6 +21,8 @@ function NavigationBar(props) {
       this.props.updateUser(null);
     });
   };
+
+  let linkActive = {color: "#17a2b8"}
 
   return (
     <Navbar
@@ -34,13 +37,13 @@ function NavigationBar(props) {
       <Collapse isOpen={!collapsed} navbar>
         <Nav className="mr-auto" navbar>
           <NavItem>
-            <NavLink href="/profile">Your Collection</NavLink>
+            <NavLink tag={RRNavLink} activeStyle={linkActive} to="/profile">Your Collection</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/searchArtist">Search for Artist</NavLink>
+            <NavLink tag={RRNavLink}  activeStyle={linkActive} to="/searchArtist">Search for Artist</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/scan">Scan a Record</NavLink>
+            <NavLink tag={RRNavLink} activeStyle={linkActive} to="/scan">Scan a Record</NavLink>
           </NavItem>
         </Nav>
         <Nav navbar>

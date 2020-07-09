@@ -1,6 +1,9 @@
 .startFullHeight {
   height: 100vh;
-  background-color:black;
+  background-image: url("../images/record-full.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .fadeIn {
