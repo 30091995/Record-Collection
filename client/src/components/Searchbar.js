@@ -27,7 +27,7 @@ function Searchbar(props) {
           value={props.currentSearchTerm}
         />
         <InputGroupAddon addonType="append">
-          <Button outline color="secondary">
+          <Button outline color="info">
             {props.children}
           </Button>
         </InputGroupAddon>
