@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import SearchBar from "./Searchbar.js";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import placeholderImage from '../images/no-image-found-2.jpg'
+import {
+  Container,
+  Card,
+  CardImg,
+  CardColumns,
+  CardTitle,
+  CardImgOverlay,
+  Row,
+  Col,
+  CardLink,
+} from "reactstrap";
+import './ShowArtist.css'
 
 class ShowArtists extends Component {
   state = {
@@ -11,7 +24,7 @@ class ShowArtists extends Component {
 
   searchHandler = (search) => {
     this.setState({
-      searchTerm: search
+      searchTerm: search,
     });
   };
 
@@ -24,28 +37,51 @@ class ShowArtists extends Component {
     });
   };
 
-  render() {
-    return (
-      <div>
-        <h3>Search Artist:</h3>
-        <SearchBar
-          onSearchCallBack={this.searchHandler}
-          currentSearchTerm={this.state.searchTerm}
-          onSubmit={this.submitHandler}
-          placeholder="Type in Artist"
-        >
-          Search for Artist
-        </SearchBar>
 
-        {this.state.artists.map((singleArtist) => (
-          <div key={singleArtist.id}>
-            <img src={singleArtist.cover_image} alt="Pic not available" />
-            <Link to={"/artist/" + singleArtist.id + "/releases"}>
-              {singleArtist.title} <br />
-            </Link>
-          </div>
-        ))}
-      </div>
+  render() {
+
+    return (
+      <Container className="topMargin">
+        <Row className="justify-content-center align-items-center">
+          <Col xs="auto" className="text-center my-4">
+            <Col className="display-4 text-light my-3">Search Artist</Col>
+            <hr className="border border-info rounded"></hr>
+            <Col className="py-4">
+              <SearchBar
+                className="text-center"
+                onSearchCallBack={this.searchHandler}
+                currentSearchTerm={this.state.searchTerm}
+                onSubmit={this.submitHandler}
+                placeholder="Search for Artist"
+              >
+                Search
+              </SearchBar>
+            </Col>
+          </Col>
+        </Row>
+
+        <Row className="justify-content-center">
+        <CardColumns className="mx-2">
+          {this.state.artists.map((singleArtist) => (
+      
+            <Card key={singleArtist.id} inverse>
+              <CardImg
+                width="100%"
+                src={!singleArtist.cover_image.includes("spacer") ? singleArtist.cover_image : placeholderImage}
+                alt="Pic not available"
+              />
+              <CardImgOverlay>
+                <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
+
+                <CardLink href={"/artist/" + singleArtist.id + "/releases"}>
+                  <span className="text-info"> {`${">"}`} see releases</span>
+                </CardLink>
+              </CardImgOverlay>
+            </Card>
+          ))}
+          </CardColumns>
+        </Row>
+      </Container>
     );
   }
 }

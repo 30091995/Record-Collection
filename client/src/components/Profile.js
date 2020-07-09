@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import './Profile.css';
-import SearchBar from "./Searchbar";
+import "./Profile.css";
 import RecordRow from "./RecordRow";
 import {
-  InputGroup,
-  CardGroup,
   Container,
   Input,
   Row,
@@ -53,39 +50,30 @@ class Profile extends Component {
     );
 
     return (
-      <Container fluid className="mt-5">
+      <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-
-            {this.props.user.verifiedEmail ? (
-          " "
-        ) : (
-          <div className="alert alert-warning">Don't forget to verify your e-mail</div>
-        )}
-        <h4 className="display-4 text-light">ALL YOUR RECORDS</h4>
-          </Col>
-        </Row>
-
-        <Row className="justify-content-center">
-          <Col xs="12" md="8" className="my-4">
-            <InputGroup>
+            <Col className="display-4 text-light my-3">ALL YOUR RECORDS</Col>
+            <hr className="border border-info rounded"></hr>
+            <Col className="py-4">
               <Input
-                placeholder="Search your record collection"
+                className="text-center"
+                placeholder="Type to search your collection"
                 onChange={this.searchHandler}
                 value={this.state.searchTerm}
               />
-            </InputGroup>
+            </Col>
           </Col>
         </Row>
-        
+
         <Row className="justify-content-center">
-        {filtered.map((record) => (
-          <RecordRow
-            key={record._id}
-            record={record}
-            removeHandler={this.removeOneRecord}
-          />
-        ))}
+          {filtered.map((record) => (
+            <RecordRow
+              key={record._id}
+              record={record}
+              removeHandler={this.removeOneRecord}
+            />
+          ))}
         </Row>
       </Container>
     );
