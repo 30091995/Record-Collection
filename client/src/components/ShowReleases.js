@@ -24,6 +24,7 @@ class ShowReleases extends Component {
       <div>
         {this.state.releases.length > 0 ? (
           this.state.releases.map((release, index) => (
+            
             <AddRecord singleRelease={release} key={index} user={this.props.user}/>
           ))
         ) : (
