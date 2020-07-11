@@ -20,13 +20,25 @@ class ShowReleases extends Component {
   }
 
   render() {
+    let singleRelease = {
+      artist: "",
+      title: "",
+      imgUrl: "",
+      recordMainRelease: ""
+    }
+
     return (
       <div>
         {this.state.releases.length > 0 ? (
-          this.state.releases.map((release, index) => (
-            
-            <AddRecord singleRelease={release} key={index} user={this.props.user}/>
-          ))
+          this.state.releases.map((release, index) => {
+            singleRelease = {
+              artist: release.artist,
+              title: release.title,
+              imgUrl: release.thumb,
+              recordMainRelease: release.main_release
+            }
+            return(<AddRecord singleRelease={singleRelease} key={index} user={this.props.user}/>)
+          })
         ) : (
           <Spinner size="lg" color="info">Loading...</Spinner>
         )}

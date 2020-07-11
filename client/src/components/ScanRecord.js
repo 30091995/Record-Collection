@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './ScanRecord.css'
 import axios from "axios";
-import AddRecordFromScan from "./AddRecordFromScan";
+import AddRecord from "./AddRecord";
 import { InputGroup, Input, Row, Col, Button } from "reactstrap";
 import Quagga from "quagga";
 
@@ -103,7 +103,12 @@ class ScanRecord extends Component {
   }
 
   render() {
-
+    let singleRelease = {
+      artist: "",
+      title: "",
+      imgUrl: "",
+      recordMainRelease: ""
+    }
     return (
       <Col className="marginTop">
         <h3>Scan a Record</h3>
@@ -120,9 +125,16 @@ class ScanRecord extends Component {
             <Row>
             
             {/* {this.state.apiAnswer.map(r => <Col className="col-4" ><img src={r.thumb}></img>{r.title}</Col>)} */}
-            {this.state.apiAnswer.map((release, index) => (
-            <AddRecordFromScan singleRelease={release} key={index} user={this.props.user}/>
-          ))}
+            {this.state.apiAnswer.map((release, index) => {
+            singleRelease = {
+              artist : release.title.split(' - ')[0],
+              title: release.title.split(' - ')[1],
+              imgUrl: release.thumb,
+              recordMainRelease: release.id
+            }
+            return (
+            <AddRecord singleRelease={singleRelease} key={index} user={this.props.user}/>)
+            })}
             </Row>
           </Col>
         )}
