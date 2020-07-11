@@ -19,7 +19,7 @@ class AddRecord extends Component {
       if(response.data !== null)
       {
         this.setState({
-          saved: true
+          saved: response.data.saved
         })
       }
     })
@@ -29,7 +29,7 @@ class AddRecord extends Component {
    {
      return(
       <div>
-        {this.state.saved ? "Saved" : ""}
+        {this.state.saved ? this.state.saved : ""}
       <img src={this.props.singleRelease.imgUrl} />
       <br />
       <Link to={"/showRelease/" + this.props.singleRelease.recordMainRelease }>{this.props.singleRelease.title}</Link>
