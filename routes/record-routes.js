@@ -29,13 +29,13 @@ recordRoutes.post('/records', (req, res, next) => {
         record.owners.push(userId)
         record.save()
         res.json({
-          saved : record
+          saved : "Record saved"
         })
       }
       else
       {
         res.json({
-          saved: null
+          saved: "Record is already in your collection"
         })
       }
     }
@@ -51,7 +51,7 @@ recordRoutes.post('/records', (req, res, next) => {
         savedRecord.owners.push(userId)
         savedRecord.save()
         res.json({
-          saved: savedRecord
+          saved: "Record saved"
         })
       })
     }
