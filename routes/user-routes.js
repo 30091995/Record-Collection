@@ -154,6 +154,7 @@ userRoutes.get(
     ]
   })
 );
+
 userRoutes.get(
   "/auth/google/callback",
   passport.authenticate("google", {

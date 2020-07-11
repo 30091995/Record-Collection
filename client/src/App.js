@@ -43,12 +43,13 @@ class App extends Component {
         <Route exact path="/searchArtist" render={() => this.protected(<ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>)} />
         <Route exact path="/signup" render={() => <Signup updateUser={this.updateUser}></Signup>} />
         <Route exact path="/login" render={() => <Login updateUser={this.updateUser}></Login>} />
-        <Route exact path="/artist/:artistId/releases" render={({match}) => this.protected(<ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>)}/>
-        <Route exact path="/verify-email" render={() => <VerifyEmail />} />
-                                                                                           
-        <Route exact path="/scan" render={() => <ScanRecord user={this.state.loggedInUser}/>} />
+        <Route exact path="/artist/:artistId/releases" render={({match}) => this.protected(<ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artistId={match.params.artistId}/>)}/>       
+        <Route exact path="/showRelease/:releaseNumber" render={({match}) => <SingleRelease user={this.state.loggedInUser} updateUser={this.updateUser} releaseNumber={match.params.releaseNumber} />} />                                                        
+        <Route exact path="/scan" render={() => this.protected(<ScanRecord user={this.state.loggedInUser}/>)} />
 
-        <Route exact path="/showRelease/:releaseNumber" render={({match}) => <SingleRelease user={this.state.loggedInUser} updateUser={this.updateUser} releaseNumber={match.params.releaseNumber} />} />
+        <Route exact path="/verify-email" render={() => <VerifyEmail />} />   
+
+
 
     </div>
     );
