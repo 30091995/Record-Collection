@@ -143,8 +143,7 @@ class Login extends Component {
     return (
       <Container fluid className="loginFullHeight">
         {this.renderRedirect()}
-        {loginForm}
-        <a href="http://localhost:5555/api/auth/google">Log in W google</a>
+        {loginForm} 
       </Container>
     );
   }
