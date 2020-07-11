@@ -48,7 +48,7 @@ function NavigationBar(props) {
         </Nav>
         <Nav navbar>
           <NavbarText>
-            {!props.user.email || props.user.verifiedEmail ? null : (
+            {props.user.verifiedEmail ? null : (
               <span className="badge badge-danger">
                 Please verify your Email
               </span>
