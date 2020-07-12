@@ -27,53 +27,30 @@ function RecordRow(props) {
   };
 
   return (
-    // <Card className="m-3 shadow">
-    //   <div
-    //     id="imgSize"
-    //     style={{ backgroundImage: `url("${props.record.imgUrl}"` }}
-    //   ></div>
-    //   <CardBody>
-    //     <CardText>
-    //       {props.record.artist}
-    //   {props.record.title}
-    //     </CardText>
-    //   </CardBody>
-    //   <CardFooter>
-    //     <Button outline inverted color="danger" onClick={removeRecordCallBack}>
-    //       Remove
-    //     </Button>
-    //     <Button outline inverted color="info">
-    //       <Link as Button to={"/showRelease/" + props.record.recordMainRelease}>
-    //         Show Record
-    //       </Link>
-    //     </Button>
-    //   </CardFooter>
-    // </Card>
     <div className="card-group">
-      <div className="card shadow m-2 border-secondary" style={{ width: "150px" }} id="st">
+      <div
+        className="card shadow m-2 border-secondary"
+        style={{ width: "150px" }}
+        id="st"
+      >
         <div
           id="imgSize"
           style={{ backgroundImage: `url("${props.record.imgUrl}"` }}
         />
         <div className="card-body">
           <h6 className="card-title">{props.record.artist}</h6>
-          <p className="text-muted">{props.record.title}</p>
+          <p className="text-muted smallerText">{props.record.title}</p>
+
+          <Link
+            className="text-info smallerText"
+            to={"/showRelease/" + props.record.recordMainRelease}
+          >
+            Show Tracks
+          </Link>
         </div>
 
         <div className="card-footer bg-light">
-          <Link
-            className="badge badge-info mx-1"
-            to={"/showRelease/" + props.record.recordMainRelease}
-          >
-            Show Release
-          </Link>
-
-          <Link
-            className="card-link badge badge-danger mx-1"
-            onClick={removeRecordCallBack}
-          >
-            Remove
-          </Link>
+          <Button outline block color="danger" size="sm" onClick={removeRecordCallBack}>Remove</Button>
         </div>
       </div>
     </div>

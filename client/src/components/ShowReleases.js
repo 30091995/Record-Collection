@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AddRecord from './AddRecord'
-import { Spinner } from 'reactstrap';
+import AddRecord from "./AddRecord";
+import { Spinner, Row, Container, Col } from "reactstrap";
 
 class ShowReleases extends Component {
   state = {
@@ -13,9 +13,9 @@ class ShowReleases extends Component {
       this.setState({
         releases: releases.data.releases.filter(
           (singleRelease) => singleRelease.type === "master"
-        )
+        ),
       });
-      console.log(this.state.releases)
+      console.log(this.state.releases);
     });
   }
 
@@ -24,25 +24,44 @@ class ShowReleases extends Component {
       artist: "",
       title: "",
       imgUrl: "",
-      recordMainRelease: ""
-    }
+      recordMainRelease: "",
+    };
 
     return (
-      <div>
+      <Container fluid className="topMargin">
+        <Row className="justify-content-center align-items-center">
+          <Col xs="auto" className="text-center my-4">
+            <Col className="display-4 text-light my-3">Releases of <span className="text-info">{this.props.artist}</span></Col>
+            <hr className="border border-info rounded"></hr>
+          </Col>
+        </Row>
+
         {this.state.releases.length > 0 ? (
-          this.state.releases.map((release, index) => {
-            singleRelease = {
-              artist: release.artist,
-              title: release.title,
-              imgUrl: release.thumb,
-              recordMainRelease: release.main_release
-            }
-            return(<AddRecord singleRelease={singleRelease} key={index} user={this.props.user}/>)
-          })
+          <Row className="justify-content-center">
+            {this.state.releases.map((release, index) => {
+              singleRelease = {
+                artist: release.artist,
+                title: release.title,
+                imgUrl: release.thumb,
+                recordMainRelease: release.main_release,
+              };
+              return (
+                <AddRecord
+                  singleRelease={singleRelease}
+                  key={index}
+                  user={this.props.user}
+                />
+              );
+            })}
+          </Row>
         ) : (
-          <Spinner size="lg" color="info">Loading...</Spinner>
+          <Row className="justify-content-center">
+          <Spinner size="lg" color="info">
+            Loading...
+          </Spinner>
+          </Row>
         )}
-      </div>
+      </Container>
     );
   }
 }

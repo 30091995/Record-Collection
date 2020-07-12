@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
-import './Signup.css'
+import "./Signup.css";
 import {
   Container,
   Row,
+  Alert,
   Col,
   Form,
   FormGroup,
@@ -14,7 +15,6 @@ import {
   FormText,
 } from "reactstrap";
 
-
 class Signup extends Component {
   state = {
     email: "",
@@ -22,7 +22,14 @@ class Signup extends Component {
     username: "",
     fullname: "",
     redirect: false,
-    error: null
+    error: null,
+  };
+
+  // for error alert
+  onDismiss = () => {
+    this.setState({
+      errorMessage: null,
+    });
   };
 
   // you can use for every input field
@@ -52,13 +59,12 @@ class Signup extends Component {
         });
       })
       .catch((err) => {
-        if(err.response.data !== null)
-        {
+        if (err.response.data !== null) {
           this.setState({
-            error: err.response.data.message
-          })
+            error: err.response.data.message,
+          });
         }
-      })
+      });
   };
 
   renderRedirect = () => {
@@ -68,82 +74,96 @@ class Signup extends Component {
   };
 
   render() {
-
     let signupForm = (
-    <Row className="h-100 align-items-center justify-content-center signupFadeIn">
-      <Col xs="10" sm="6">
-      <Form onSubmit={this.handleFormSubmit}>
-        <FormText className="my-4">
-          <h2>Signup</h2>
-        </FormText>
-        <br></br>
+      <Row className="h-100 align-items-center justify-content-center signupFadeIn">
+        <Col xs="10" sm="6">
+          <Form onSubmit={this.handleFormSubmit}>
+            <FormText className="my-4">
+              <h2 className="h2">
+                <span>Signup</span>
+              </h2>
+            </FormText>
 
+            {this.state.error ? (
+              <Alert toggle={this.onDismiss} color="danger">
+                {this.state.error}{" "}
+              </Alert>
+            ) : null}
 
-        <FormGroup>
-          <Label className="text-info">E-mail</Label>
-          <Input
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-          />
-        </FormGroup>
+            <FormGroup>
+              <Label className="text-info">E-mail</Label>
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-        <FormGroup>
-          <Label className="text-info">Password</Label>
-          <Input
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
-        </FormGroup>
+            <FormGroup>
+              <Label className="text-info">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-        <FormGroup>
-          <Label className="text-info">Username</Label>
-          <Input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-          />
-        </FormGroup>
+            <FormGroup>
+              <Label className="text-info">Username</Label>
+              <Input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-        <FormGroup>
-          <Label className="text-info">Full Name</Label>
-          <Input
-            type="text"
-            name="fullname"
-            value={this.state.fullname}
-            onChange={this.handleChange}
-            required
-          />
-        </FormGroup>
+            <FormGroup>
+              <Label className="text-info">Full Name</Label>
+              <Input
+                type="text"
+                name="fullname"
+                value={this.state.fullname}
+                onChange={this.handleChange}
+                required
+              />
+            </FormGroup>
 
-        <FormGroup>
-            <Button outline inverted color="info" value="signup" type="submit" className="my-2">
-              Signup
-            </Button>
-          </FormGroup>
+            <FormGroup>
+              <Button
+                outline
+                inverted
+                color="info"
+                value="signup"
+                type="submit"
+                className="my-2"
+              >
+                Signup
+              </Button>
+            </FormGroup>
 
-          <FormText>Already signed up? <Link to="/login" className="text-info">Login here</Link>.
-          </FormText>
-
-      </Form>
-      </Col>
-    </Row>
-    )
+            <FormText>
+              Already signed up?{" "}
+              <Link to="/login" className="text-info">
+                Login here
+              </Link>
+              .
+            </FormText>
+          </Form>
+        </Col>
+      </Row>
+    );
 
     return (
       <Container fluid className="signupFullHeight">
-        {this.state.error ? <h1>{this.state.error}</h1> : ""}
-      {this.renderRedirect()}
-      {signupForm}
-    </Container>
-
+        {this.renderRedirect()}
+        {signupForm}
+      </Container>
 
       // <div>
       //   <div>

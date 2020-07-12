@@ -35,7 +35,7 @@ recordRoutes.post('/records', (req, res, next) => {
       else
       {
         res.json({
-          saved: "Record is already in your collection"
+          saved: "Already in collection!"
         })
       }
     }

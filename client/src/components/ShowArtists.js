@@ -34,6 +34,7 @@ class ShowArtists extends Component {
         searchTerm: "",
         artists: response.data.filter((res) => res.type === "artist"),
       });
+      console.log(this.state.artists)
     });
   };
 
@@ -73,7 +74,7 @@ class ShowArtists extends Component {
               <CardImgOverlay>
                 <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
 
-                <CardLink href={"/artist/" + singleArtist.id + "/releases"}>
+                <CardLink href={singleArtist.title + '/' + singleArtist.id + "/releases"}>
                   <span className="text-info"> {`${">"}`} see releases</span>
                 </CardLink>
               </CardImgOverlay>
