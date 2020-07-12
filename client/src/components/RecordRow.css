@@ -9,3 +9,8 @@
 #st {
   border-width: 2px;
 }
+
+.smallerText {
+  font-size: 0.9rem;
+  font-weight: lighter;
+}

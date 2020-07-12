@@ -55,7 +55,7 @@ class Profile extends Component {
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-            <Col className="display-4 text-light my-3">ALL YOUR RECORDS</Col>
+            <Col className="display-4 text-light my-3">Your Records</Col>
             <hr className="border border-info rounded"></hr>
             <Col className="py-4">
               <Input
