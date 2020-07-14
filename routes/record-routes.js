@@ -1,62 +1,53 @@
 const express = require("express");
-const recordRoutes = express.Router()
+const recordRoutes = express.Router();
 const Record = require("../models/record-model");
-const axios = require ('axios')
-
-
+const axios = require("axios");
 
 recordRoutes.use((req, res, next) => {
   if (req.isAuthenticated() /* && req.user.verifiedEmail === true */) {
     next();
   } else {
-    res.status(402).json({message: "Please login to view this content" });
+    res.status(402).json({ message: "Please login to view this content" });
   }
 });
 
-recordRoutes.get('/records', (req, res, next) => {
-  Record.find().then( allRecords => {
-    res.json(allRecords)
-  })
-})
+recordRoutes.get("/records", (req, res, next) => {
+  Record.find().then((allRecords) => {
+    res.json(allRecords);
+  });
+});
 
-recordRoutes.post('/records', (req, res, next) => {
-  const { artist, title, imgUrl, recordMainRelease, userId } = req.body
+recordRoutes.post("/records", (req, res, next) => {
+  const { artist, title, imgUrl, recordMainRelease, userId } = req.body;
   Record.findOne({ title }).then((record) => {
-    if(record !== null)
-    {
-      if(record.owners.includes(userId) === false)
-      {
-        record.owners.push(userId)
-        record.save()
+    if (record !== null) {
+      if (record.owners.includes(userId) === false) {
+        record.owners.push(userId);
+        record.save();
         res.json({
-          saved : "Record saved"
-        })
-      }
-      else
-      {
+          saved: "Record saved",
+        });
+      } else {
         res.json({
-          saved: "Already in collection!"
-        })
+          saved: "Already in collection!",
+        });
       }
-    }
-    else if (record === null)
-    {
+    } else if (record === null) {
       Record.create({
         artist,
         title,
         imgUrl,
-        recordMainRelease
-      })
-      .then((savedRecord) => {
-        savedRecord.owners.push(userId)
-        savedRecord.save()
+        recordMainRelease,
+      }).then((savedRecord) => {
+        savedRecord.owners.push(userId);
+        savedRecord.save();
         res.json({
-          saved: "Record saved"
-        })
-      })
+          saved: "Record saved",
+        });
+      });
     }
-  })
-})
+  });
+});
 
 recordRoutes.get("/searchArtist/:artistname", (req, res, next) => {
   axios
@@ -71,38 +62,38 @@ recordRoutes.get("/searchArtist/:artistname", (req, res, next) => {
 });
 
 recordRoutes.get("/showReleases/:artistId", (req, res, next) => {
+  let url =
+    "https://api.discogs.com/artists/" +
+    req.params.artistId +
+    "/releases" +
+    `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`;
 
-  let url = 'https://api.discogs.com/artists/' + req.params.artistId + "/releases" +
-  `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`
+  axios.get(url).then((response) => {
+    res.json(response.data);
+  });
+});
 
-  axios
-  .get(url)
-  .then((response) => {
-    res.json(response.data)
-  })
-})
-
-recordRoutes.put("/deleterecord/:recordTitle", (req, res, next) => {
-  const recordTitle = req.params.recordTitle
-  Record.findOneAndUpdate({title :recordTitle }, { $pull : {owners : req.user.id}})
-  .then(() => {
-    console.log("Done")
-  })
-})
+recordRoutes.put("/deleterecord/:record_id", (req, res, next) => {
+  const recordId = req.params.record_id;
+  Record.findOneAndUpdate(
+    { _id: recordId },
+    { $pull: { owners: req.user.id } }
+  ).then(() => {
+    console.log("Done");
+  });
+});
 
 recordRoutes.get("/showSingleRelease/:releaseNumber", (req, res, next) => {
+  const releaseNumber = req.params.releaseNumber;
+  let url =
+    "https://api.discogs.com/releases/" +
+    releaseNumber +
+    `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`;
 
-  const releaseNumber = req.params.releaseNumber
-  let url = "https://api.discogs.com/releases/" + releaseNumber + 
-  `?key=${process.env.DISCOGS_CONSUMER_KEY}&secret=${process.env.DISCOGS_CONSUMER_SECRET}`;
-
-  axios
-  .get(url)
-  .then((release) => {
-    res.json(release.data)
-  })
-
-})
+  axios.get(url).then((release) => {
+    res.json(release.data);
+  });
+});
 
 // scanRecod route
 recordRoutes.get("/scanRecord/:barcode", (req, res, next) => {
@@ -116,8 +107,4 @@ recordRoutes.get("/scanRecord/:barcode", (req, res, next) => {
     });
 });
 
-module.exports = recordRoutes
-
-
-
-
+module.exports = recordRoutes;

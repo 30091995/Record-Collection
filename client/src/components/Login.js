@@ -106,7 +106,6 @@ class Login extends Component {
                 <Col xs="auto">
                   <Button
                     outline
-                    inverted
                     color="info"
                     type="submit"
                     className="my-2"
@@ -117,7 +116,6 @@ class Login extends Component {
                 <Col xs="auto">
                   <Button
                     outline
-                    inverted
                     color="info"
                     href="http://localhost:5555/api/auth/google"
                     className="my-2 nowrap"

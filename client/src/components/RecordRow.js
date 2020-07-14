@@ -20,10 +20,10 @@ import {
 
 function RecordRow(props) {
   let removeRecordCallBack = () => {
-    axios.put("/api/deleterecord/" + props.record.title).then((response) => {
+    axios.put("/api/deleterecord/" + props.record._id).then((response) => {
       console.log("Record removed from collection");
     });
-    props.removeHandler(props.record.title);
+    props.removeHandler(props.record._id);
   };
 
   return (
