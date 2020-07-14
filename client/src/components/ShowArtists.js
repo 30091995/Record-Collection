@@ -61,27 +61,31 @@ class ShowArtists extends Component {
           </Col>
         </Row>
 
-        <Row className="justify-content-center">
         <CardColumns className="mx-2">
           {this.state.artists.map((singleArtist) => (
       
             <Card key={singleArtist.id} inverse>
+
+
+
               <CardImg
                 width="100%"
                 src={!singleArtist.cover_image.includes("spacer") ? singleArtist.cover_image : placeholderImage}
                 alt="Pic not available"
               />
               <CardImgOverlay>
+              
                 <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
 
                 <CardLink href={singleArtist.title + '/' + singleArtist.id + "/releases"}>
                   <span className="text-info"> {`${">"}`} see releases</span>
                 </CardLink>
               </CardImgOverlay>
+
             </Card>
           ))}
           </CardColumns>
-        </Row>
+
       </Container>
     );
   }

@@ -28,7 +28,7 @@ class Signup extends Component {
   // for error alert
   onDismiss = () => {
     this.setState({
-      errorMessage: null,
+      error: null,
     });
   };
 
@@ -86,7 +86,7 @@ class Signup extends Component {
 
             {this.state.error ? (
               <Alert toggle={this.onDismiss} color="danger">
-                {this.state.error}{" "}
+                {this.state.error}
               </Alert>
             ) : null}
 
@@ -137,7 +137,6 @@ class Signup extends Component {
             <FormGroup>
               <Button
                 outline
-                inverted
                 color="info"
                 value="signup"
                 type="submit"
