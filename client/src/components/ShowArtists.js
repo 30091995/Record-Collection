@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SearchBar from "./Searchbar.js";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import placeholderImage from '../images/no-image-found-2.jpg'
 import {

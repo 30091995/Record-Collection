@@ -3,19 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RecordRow.css";
 import {
-  Card,
-  Col,
-  Row,
-  CardImg,
-  CardText,
-  CardDeck,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
   Button,
-  CardLink,
-  CardHeader,
-  CardFooter,
 } from "reactstrap";
 
 function RecordRow(props) {
