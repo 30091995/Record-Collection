@@ -9,6 +9,7 @@ class ScanRecord extends Component {
   state = {
     scanResult: null,
     apiAnswer: null,
+    rescan: 0,
   };
 
   componentDidMount() {
@@ -101,6 +102,17 @@ class ScanRecord extends Component {
     });
   }
 
+  componentWillUnmount() {
+    Quagga.stop();
+  }
+
+  // reScan = () => {
+  //   this.setState({
+  //     scanResult: null,
+  //     apiAnswer: null,
+  //   })
+  // }
+
   render() {
     let singleRelease = {
       artist: "",
@@ -118,21 +130,19 @@ class ScanRecord extends Component {
             <Col className="h-6 text-light my-3">
               Scan the Barcode of your record to add it to your collection
             </Col>
-
           </Col>
         </Row>
 
         {!this.state.scanResult ? (
-          <Col>
-            <div id="vid"></div>
-          </Col>
-        ) : (
-          <Row>
-          <Col>We found releases of XXX for you:</Col>
           <Row className="justify-content-center align-items-center">
-            <Col><Button color="info">Do another Scan</Button></Col>
-            
-
+            <Col
+              xs="auto"
+              className="text-center my-4"
+              id="vid"
+            ></Col>
+          </Row>
+        ) : (
+          <Row className="justify-content-center align-items-center">
             {this.state.apiAnswer.map((release, index) => {
               singleRelease = {
                 artist: release.title.split(" - ")[0],
@@ -149,7 +159,9 @@ class ScanRecord extends Component {
                 />
               );
             })}
-          </Row>
+            <Button color="info">
+              Do another Scan
+            </Button>
           </Row>
         )}
       </Container>
