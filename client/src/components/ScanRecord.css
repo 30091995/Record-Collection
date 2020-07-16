@@ -1,8 +1,13 @@
 /* this is putting the canvas on top of the camera stream*/
 .drawingBuffer {
-  margin-top: -480px;
+  margin-left: -300px;
 }
 
 .topMargin {
   margin-top: 49px;
+}
+
+video {
+border: 2px solid #17a2b8;
+box-sizing: border-box;
 }
