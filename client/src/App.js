@@ -26,7 +26,7 @@ class App extends Component {
     }
 
     protected = (comp) => {
-      if (this.state.loggedInUser) {
+      if (this.state.loggedInUser && this.state.loggedInUser.verifiedEmail) {
         return comp
       } else {
         return <Redirect to="/login"></Redirect>
@@ -37,7 +37,7 @@ class App extends Component {
     render () {
     return (
     <div className="App">
-    {this.state.loggedInUser ? <Route path="/" render={() => <NavigationBar user={this.state.loggedInUser} updateUser={this.updateUser}></NavigationBar>} /> : null }
+    {this.state.loggedInUser && this.state.loggedInUser.verifiedEmail ? <Route path="/" render={() => <NavigationBar user={this.state.loggedInUser} updateUser={this.updateUser}></NavigationBar>} /> : null }
         <Route exact path="/" render={() => <Start user={this.state.loggedInUser}/>} />
         <Route exact path="/profile" render={() => this.protected(<Profile user={this.state.loggedInUser} updateUser={this.updateUser}/>)} />
         <Route exact path="/searchArtist" render={() => this.protected(<ShowArtists user={this.state.loggedInUser} updateUser={this.updateUser}></ShowArtists>)} />
@@ -46,7 +46,6 @@ class App extends Component {
         <Route exact path="/:artistId/releases" render={({match}) => this.protected(<ShowReleases user={this.state.loggedInUser} updateUser={this.updateUser} artist={match.params.artistName} artistId={match.params.artistId}/>)}/>       
         <Route exact path="/showRelease/:releaseNumber" render={({match}) => this.protected(<SingleRelease user={this.state.loggedInUser} updateUser={this.updateUser} releaseNumber={match.params.releaseNumber} />)} />                                                        
         <Route exact path="/scan" render={() => this.protected(<ScanRecord user={this.state.loggedInUser}/>)} />
-        <Route exact path="/verify-email" render={() => <VerifyEmail />} />   
     </div>
     );
   }
