@@ -16,7 +16,7 @@ require("./configs/passport")
 
 
 mongoose
-  .connect('mongodb://localhost/recordcollection', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -46,7 +46,7 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // ADD SESSION SETTINGS HERE:
@@ -70,20 +70,16 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
-  })
-);
-
-
-
 const index = require('./routes/index');
 app.use('/', index);
 
 app.use('/api', require('./routes/user-routes'))
 
 app.use('/api', require('./routes/record-routes'))
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 module.exports = app;
