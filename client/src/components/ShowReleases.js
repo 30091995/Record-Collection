@@ -6,6 +6,7 @@ import { Spinner, Row, Container, Col } from "reactstrap";
 class ShowReleases extends Component {
   state = {
     releases: [],
+    artist: null
   };
 
   componentDidMount() {
@@ -14,6 +15,7 @@ class ShowReleases extends Component {
         releases: releases.data.releases.filter(
           (singleRelease) => singleRelease.type === "master"
         ),
+        artist: releases.data.releases[0].artist
       });
       console.log(this.state.releases);
     });
@@ -31,7 +33,7 @@ class ShowReleases extends Component {
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-            <Col className="display-4 text-light my-3">Releases of <span className="text-info">{this.props.artist}</span></Col>
+           {this.state.artist ?  <Col className="display-4 text-light my-3">Releases of <span className="text-info">{this.state.artist}</span></Col> : "ffj" }
             <hr className="border border-info rounded"></hr>
           </Col>
         </Row>

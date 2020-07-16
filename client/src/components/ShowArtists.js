@@ -76,7 +76,7 @@ class ShowArtists extends Component {
               
                 <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
 
-                <CardLink href={singleArtist.title + '/' + singleArtist.id + "/releases"}>
+                <CardLink href={singleArtist.id + "/releases"}>
                   <span className="text-info"> {`${">"}`} see releases</span>
                 </CardLink>
               </CardImgOverlay>

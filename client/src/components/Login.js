@@ -117,7 +117,7 @@ class Login extends Component {
                   <Button
                     outline
                     color="info"
-                    href="http://localhost:5555/api/auth/google"
+                    href={process.env.REACT_APP_GOOGLE_LOGIN + "/api/auth/google"}
                     className="my-2 nowrap"
                   >
                     Login with Google
