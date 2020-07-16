@@ -9,7 +9,6 @@ class ScanRecord extends Component {
   state = {
     scanResult: null,
     apiAnswer: null,
-    rescan: 0,
   };
 
   componentDidMount() {
@@ -20,8 +19,8 @@ class ScanRecord extends Component {
           type: "LiveStream",
           target: document.getElementById("vid"),
           constraints: {
-            width: 640,
-            height: 480,
+            width: 300,
+            height: 225,
             facingMode: "environment",
             // deviceId: "7832475934759384534"
           },
@@ -62,7 +61,7 @@ class ScanRecord extends Component {
             })
             .forEach(function (box) {
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
-                color: "green",
+                color: "#17a2b8",
                 lineWidth: 2,
               });
             });
@@ -70,7 +69,7 @@ class ScanRecord extends Component {
 
         if (result.box) {
           Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
-            color: "#00F",
+            color: "#17a2b8",
             lineWidth: 2,
           });
         }
@@ -88,30 +87,23 @@ class ScanRecord extends Component {
 
     Quagga.onDetected((data) => {
       if (data) {
-        Quagga.stop();
         axios
           .get("/api/scanRecord/" + data.codeResult.code)
           .then((response) => {
+            let allResults = response.data;
+
             this.setState({
               scanResult: data.codeResult.code,
-              apiAnswer: response.data,
+              apiAnswer: allResults,
             });
           });
       }
-      console.log(this.state.apiAnswer);
     });
   }
 
   componentWillUnmount() {
     Quagga.stop();
   }
-
-  // reScan = () => {
-  //   this.setState({
-  //     scanResult: null,
-  //     apiAnswer: null,
-  //   })
-  // }
 
   render() {
     let singleRelease = {
@@ -120,6 +112,24 @@ class ScanRecord extends Component {
       imgUrl: "",
       recordMainRelease: "",
     };
+
+    let scannedRecordApiAnswer = () =>
+      this.state.apiAnswer.map((release, index) => {
+        singleRelease = {
+          artist: release.title.split(" - ")[0],
+          title: release.title.split(" - ")[1],
+          imgUrl: release.thumb,
+          recordMainRelease: release.id,
+        };
+
+        return (
+          <AddRecord
+            singleRelease={singleRelease}
+            key={index}
+            user={this.props.user}
+          />
+        );
+      });
 
     return (
       <Container fluid className="topMargin">
@@ -132,38 +142,19 @@ class ScanRecord extends Component {
             </Col>
           </Col>
         </Row>
+        <Row className="justify-content-center align-items-center">
+          <Col number={this.state.key} xs="auto" id="vid"></Col>
+        </Row>
+        {this.state.scanResult ? 
+        <Row className="justify-content-center m-3">
+          <h4 className="text-center ">Records found for barcode <br></br><span className="text-info font-weight-normal">{this.state.scanResult}</span></h4>
+        </Row>
+        : null
+        }
 
-        {!this.state.scanResult ? (
-          <Row className="justify-content-center align-items-center">
-            <Col
-              xs="auto"
-              className="text-center my-4"
-              id="vid"
-            ></Col>
-          </Row>
-        ) : (
-          <Row className="justify-content-center align-items-center">
-            {this.state.apiAnswer.map((release, index) => {
-              singleRelease = {
-                artist: release.title.split(" - ")[0],
-                title: release.title.split(" - ")[1],
-                imgUrl: release.thumb,
-                recordMainRelease: release.id,
-              };
-
-              return (
-                <AddRecord
-                  singleRelease={singleRelease}
-                  key={index}
-                  user={this.props.user}
-                />
-              );
-            })}
-            <Button color="info">
-              Do another Scan
-            </Button>
-          </Row>
-        )}
+        <Row className="justify-content-center m-3">
+          {this.state.scanResult ? scannedRecordApiAnswer() : null}
+        </Row>
       </Container>
     );
   }
