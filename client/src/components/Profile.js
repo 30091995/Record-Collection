@@ -16,7 +16,7 @@ class Profile extends Component {
     searchTerm: "",
     records: [],
   };
-
+  
   componentDidMount() {
     axios.get("/api/records").then((allRecords) => {
       console.log(allRecords.data);

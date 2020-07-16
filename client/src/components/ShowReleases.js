@@ -29,7 +29,7 @@ class ShowReleases extends Component {
 
     return (
       <div>
-        {this.state.releases.length > 0 ? (
+        {this.state.releases.length > 0 ? 
           this.state.releases.map((release, index) => {
             singleRelease = {
               artist: release.artist,
@@ -39,7 +39,7 @@ class ShowReleases extends Component {
             }
             return(<AddRecord singleRelease={singleRelease} key={index} user={this.props.user}/>)
           })
-        ) : (
+         : (
           <Spinner size="lg" color="info">Loading...</Spinner>
         )}
       </div>
