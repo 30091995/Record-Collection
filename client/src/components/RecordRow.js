@@ -7,6 +7,7 @@ import {
 } from "reactstrap";
 
 function RecordRow(props) {
+
   let removeRecordCallBack = () => {
     axios.put("/api/deleterecord/" + props.record._id).then((response) => {
       console.log("Record removed from collection");
