@@ -4,6 +4,7 @@ import axios from "axios";
 import AddRecord from "./AddRecord";
 import { InputGroup, Input, Row, Col, Button, Container } from "reactstrap";
 import Quagga from "quagga";
+import { setRandomFallback } from "bcryptjs";
 
 class ScanRecord extends Component {
   state = {
@@ -12,6 +13,16 @@ class ScanRecord extends Component {
   };
 
   componentDidMount() {
+    this.quaggaStart()
+  }
+
+  componentWillUnmount() {
+    Quagga.stop();
+  }
+
+  quaggaStart = () => {
+
+
     Quagga.init(
       {
         inputStream: {
@@ -19,8 +30,8 @@ class ScanRecord extends Component {
           type: "LiveStream",
           target: document.getElementById("vid"),
           constraints: {
-            width: 300,
-            height: 225,
+
+
             facingMode: "environment",
             // deviceId: "7832475934759384534"
           },
@@ -30,7 +41,8 @@ class ScanRecord extends Component {
           readers: ["ean_reader", "code_128_reader", "upc_reader"],
         },
         locator: {
-          halfSample: false,
+          halfSample: true,
+          patchSize: "medium",
         },
       },
       function (err) {
@@ -87,11 +99,11 @@ class ScanRecord extends Component {
 
     Quagga.onDetected((data) => {
       if (data) {
+        Quagga.stop();
         axios
           .get("/api/scanRecord/" + data.codeResult.code)
           .then((response) => {
             let allResults = response.data;
-
             this.setState({
               scanResult: data.codeResult.code,
               apiAnswer: allResults,
@@ -99,10 +111,6 @@ class ScanRecord extends Component {
           });
       }
     });
-  }
-
-  componentWillUnmount() {
-    Quagga.stop();
   }
 
   render() {
@@ -113,8 +121,8 @@ class ScanRecord extends Component {
       recordMainRelease: "",
     };
 
-    let scannedRecordApiAnswer = () =>
-      this.state.apiAnswer.map((release, index) => {
+    let scannedRecordApiAnswer = () => {
+      return this.state.apiAnswer.map((release, index) => {
         singleRelease = {
           artist: release.title.split(" - ")[0],
           title: release.title.split(" - ")[1],
@@ -130,6 +138,7 @@ class ScanRecord extends Component {
           />
         );
       });
+    }
 
     return (
       <Container fluid className="topMargin">
@@ -140,20 +149,24 @@ class ScanRecord extends Component {
             <Col className="h-6 text-light my-3">
               Scan the Barcode of your record to add it to your collection
             </Col>
+            
+            {this.state.scanResult && <Button color="info" outline onClick={() => { this.quaggaStart() }}>Scan again</Button>}
+
           </Col>
         </Row>
         <Row className="justify-content-center align-items-center">
-          <Col number={this.state.key} xs="auto" id="vid"></Col>
+          <Col xs="auto" id="vid"></Col>
         </Row>
-        {this.state.scanResult ? 
-        <Row className="justify-content-center m-3">
-          <h4 className="text-center ">Records found for barcode <br></br><span className="text-info font-weight-normal">{this.state.scanResult}</span></h4>
+        {this.state.scanResult &&
+        <Row className="justify-content-center m-3 text-center">
+         <Row><h4 className="text-center">Records found for barcode <br></br><span className="text-info font-weight-normal">{this.state.scanResult}</span></h4></Row>
         </Row>
-        : null
         }
-
-        <Row className="justify-content-center m-3">
-          {this.state.scanResult ? scannedRecordApiAnswer() : null}
+        <Row className="justify-content-center">
+          {
+            this.state.scanResult && 
+            scannedRecordApiAnswer()
+          }
         </Row>
       </Container>
     );

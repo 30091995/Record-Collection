@@ -69,7 +69,7 @@ class Signup extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to="/verify-email" />;
+      return <Redirect to="/" />;
     }
   };
 
@@ -163,67 +163,6 @@ class Signup extends Component {
         {this.renderRedirect()}
         {signupForm}
       </Container>
-
-      // <div>
-      //   <div>
-      //     {this.renderRedirect()}
-      //     <form onSubmit={this.handleFormSubmit}>
-      //       <div>
-      //         <h2>Signup</h2>
-      //       </div>
-
-      //       <hr></hr>
-
-      //       <div>
-      //         <label>E-mail</label>
-      //         <input
-      //           type="text"
-      //           name="email"
-      //           value={this.state.email}
-      //           onChange={this.handleChange}
-      //           required
-      //         />
-      //       </div>
-
-      //       <div>
-      //         <label>Password</label>
-      //         <input
-      //           type="password"
-      //           name="password"
-      //           value={this.state.password}
-      //           onChange={this.handleChange}
-      //           required
-      //         />
-      //         <small id="emailHelp">Please choose more than 6 characters</small>
-      //       </div>
-
-      //       <div>
-      //         <label>Username</label>
-      //         <input
-      //           type="text"
-      //           name="username"
-      //           value={this.state.username}
-      //           onChange={this.handleChange}
-      //         />
-      //       </div>
-
-      //       <div>
-      //         <label>Full Name</label>
-      //         <input
-      //           type="text"
-      //           name="fullname"
-      //           value={this.state.fullname}
-      //           onChange={this.handleChange}
-      //         />
-      //       </div>
-      //       <div>
-      //         <button type="submit" value="Signup">
-      //           Submit
-      //         </button>
-      //       </div>
-      //     </form>
-      //   </div>
-      // </div>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./Searchbar.js";
 import axios from "axios";
-import placeholderImage from '../images/no-image-found-2.jpg'
+import placeholderImage from "../images/no-image-found-2.jpg";
 import {
   Container,
   Card,
@@ -13,7 +13,7 @@ import {
   Col,
   CardLink,
 } from "reactstrap";
-import './ShowArtist.css'
+import "./ShowArtist.css";
 
 class ShowArtists extends Component {
   state = {
@@ -33,13 +33,11 @@ class ShowArtists extends Component {
         searchTerm: "",
         artists: response.data.filter((res) => res.type === "artist"),
       });
-      console.log(this.state.artists)
+      console.log(this.state.artists);
     });
   };
 
-
   render() {
-
     return (
       <Container className="topMargin">
         <Row className="justify-content-center align-items-center">
@@ -62,29 +60,26 @@ class ShowArtists extends Component {
 
         <CardColumns className="mx-2">
           {this.state.artists.map((singleArtist) => (
-      
             <Card key={singleArtist.id} inverse>
-
-
-
               <CardImg
                 width="100%"
-                src={!singleArtist.cover_image.includes("spacer") ? singleArtist.cover_image : placeholderImage}
+                src={
+                  !singleArtist.cover_image.includes("spacer")
+                    ? singleArtist.cover_image
+                    : placeholderImage
+                }
                 alt="Pic not available"
               />
               <CardImgOverlay>
-              
                 <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
 
                 <CardLink href={singleArtist.id + "/releases"}>
                   <span className="text-info"> {`${">"}`} see releases</span>
                 </CardLink>
               </CardImgOverlay>
-
             </Card>
           ))}
-          </CardColumns>
-
+        </CardColumns>
       </Container>
     );
   }

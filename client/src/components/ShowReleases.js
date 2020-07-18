@@ -33,8 +33,10 @@ class ShowReleases extends Component {
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-           {this.state.artist ?  <Col className="display-4 text-light my-3">Releases of <span className="text-info">{this.state.artist}</span></Col> : "ffj" }
+            <Col className="display-4 text-light my-3">Releases</Col>
             <hr className="border border-info rounded"></hr>
+           {this.state.artist &&  <Col><h4 className="text-info">{this.state.artist}</h4></Col>}
+          
           </Col>
         </Row>
 
