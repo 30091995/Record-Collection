@@ -16,9 +16,9 @@ const User = require("../models/user-model.js");
 
 // SMTP
 let transporter = nodemailer.createTransport({
-  host: 'smtp.sendgrid.net',
+  host: process.env.SENDGRID_HOSTNAME,
   secure: false,
-  port: 587,
+  port: process.env.SENDGRID_PORT,
   auth: {
     user: process.env.SENDGRID_USERNAME,
     pass: process.env.SENDGRID_API_KEY,
