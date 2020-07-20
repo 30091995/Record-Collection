@@ -60,9 +60,11 @@ class ShowArtists extends Component {
 
         <CardColumns className="mx-2">
           {this.state.artists.map((singleArtist) => (
-            <Card key={singleArtist.id} inverse>
+            <div
+              key={singleArtist.id}
+              class="card border-info text-black text-left px-2 pt-2"
+            >
               <CardImg
-                width="100%"
                 src={
                   !singleArtist.cover_image.includes("spacer")
                     ? singleArtist.cover_image
@@ -70,14 +72,15 @@ class ShowArtists extends Component {
                 }
                 alt="Pic not available"
               />
-              <CardImgOverlay>
-                <CardTitle className="blurBg">{singleArtist.title}</CardTitle>
-
-                <CardLink href={singleArtist.id + "/releases"}>
-                  <span className="text-info"> {`${">"}`} see releases</span>
-                </CardLink>
-              </CardImgOverlay>
-            </Card>
+              <p className="mt-3 mx-2 text-left">
+              <CardTitle className="h5 text-info">
+                {singleArtist.title}
+              </CardTitle>
+              <CardLink className="stretched-link" href={singleArtist.id + "/releases"}>
+                <span className="text-info"> {`${">>"}`} See releases</span>
+              </CardLink>
+              </p>
+            </div>
           ))}
         </CardColumns>
       </Container>
