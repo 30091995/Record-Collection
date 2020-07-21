@@ -4,11 +4,9 @@ import axios from "axios";
 import placeholderImage from "../images/default-band-image.png";
 import {
   Container,
-  Card,
   CardImg,
   CardColumns,
   CardTitle,
-  CardImgOverlay,
   Row,
   Col,
   CardLink,

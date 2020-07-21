@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import "./ScanRecord.css";
 import axios from "axios";
 import AddRecord from "./AddRecord";
-import { InputGroup, Input, Row, Col, Button, Container } from "reactstrap";
+import { Row, Col, Button, Container } from "reactstrap";
 import Quagga from "quagga";
-import { setRandomFallback } from "bcryptjs";
 
 class ScanRecord extends Component {
   state = {
@@ -13,7 +12,7 @@ class ScanRecord extends Component {
   };
 
   componentDidMount() {
-    this.quaggaStart()
+    this.quaggaStart();
   }
 
   componentWillUnmount() {
@@ -21,8 +20,6 @@ class ScanRecord extends Component {
   }
 
   quaggaStart = () => {
-
-
     Quagga.init(
       {
         inputStream: {
@@ -30,10 +27,7 @@ class ScanRecord extends Component {
           type: "LiveStream",
           target: document.getElementById("vid"),
           constraints: {
-
-
             facingMode: "environment",
-            // deviceId: "7832475934759384534"
           },
         },
         locate: true,
@@ -111,7 +105,7 @@ class ScanRecord extends Component {
           });
       }
     });
-  }
+  };
 
   render() {
     let singleRelease = {
@@ -138,7 +132,7 @@ class ScanRecord extends Component {
           />
         );
       });
-    }
+    };
 
     return (
       <Container fluid className="topMargin">
@@ -149,24 +143,39 @@ class ScanRecord extends Component {
             <Col className="h-6 text-light my-3">
               Scan the Barcode of your record to add it to your collection
             </Col>
-            
-            {this.state.scanResult && <Button color="info" outline onClick={() => { this.quaggaStart() }}>Scan again</Button>}
 
+            {this.state.scanResult && (
+              <Button
+                color="info"
+                outline
+                onClick={() => {
+                  
+                  this.setState({scanResult: null, apiAnswer: null})
+                  this.quaggaStart();
+                }}
+              >
+                Scan again
+              </Button>
+            )}
           </Col>
         </Row>
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" id="vid"></Col>
         </Row>
-        {this.state.scanResult &&
-        <Row className="justify-content-center m-3 text-center">
-         <Row><h4 className="text-center">Records found for barcode <br></br><span className="text-info font-weight-normal">{this.state.scanResult}</span></h4></Row>
-        </Row>
-        }
+        {this.state.scanResult && (
+          <Row className="justify-content-center m-3 text-center">
+            <Row>
+              <h4 className="text-center">
+                Records found for barcode <br></br>
+                <span className="text-info font-weight-normal">
+                  {this.state.scanResult}
+                </span>
+              </h4>
+            </Row>
+          </Row>
+        )}
         <Row className="justify-content-center">
-          {
-            this.state.scanResult && 
-            scannedRecordApiAnswer()
-          }
+          {this.state.scanResult && scannedRecordApiAnswer()}
         </Row>
       </Container>
     );

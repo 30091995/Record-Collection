@@ -12,8 +12,9 @@ function RecordRow(props) {
 
     axios.put("/api/deleterecord/" + props.record._id).then((response) => {
       console.log("Record removed from collection");
+      props.removeHandler(props.record._id);
     });
-    props.removeHandler(props.record._id);
+    
   };
 
 
