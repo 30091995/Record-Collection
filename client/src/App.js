@@ -9,8 +9,6 @@ import ShowReleases from './components/ShowReleases.js'
 import NavigationBar from './components/NavigationBar.js';
 import ScanRecord from './components/ScanRecord.js';
 import SingleRelease from './components/SingleRelease.js'
-import VerifyEmail from './components/VerifyEmail.js'
-
 
 class App extends Component {
 
