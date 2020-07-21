@@ -17,11 +17,12 @@ const User = require('../models/user-model.js')
 
 
 // SMTP 
+
 let transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  host: 'SendGrid',
   auth: {
-    user: 'catvarificationapp@gmail.com',
-    pass: 'myAwesomepassword22',
+    user: 'cY2jULPdQ0OEqGjB3OzgQQ',
+    pass: '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',
   }
 });
 
