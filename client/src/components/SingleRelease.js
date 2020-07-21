@@ -21,6 +21,7 @@ class SingleRelease extends Component {
   }
 
   render() {
+
     return (
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
@@ -41,9 +42,10 @@ class SingleRelease extends Component {
           {!this.state.release && <Spinner color="info"></Spinner>}
           {this.state.release && this.state.release.videos
             ? this.state.release.videos.map((video, index) => (
-                <Col key={index} xs="auto" className="m-3 border border-info">
+               <Col key={index} xs="auto" className="m-3 border border-info resWid">
                   <ReactPlayer width="100%" height="100%" url={video.uri} />
                 </Col>
+
               ))
             : null}
         </Row>
