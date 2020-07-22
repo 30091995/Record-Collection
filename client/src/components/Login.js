@@ -66,7 +66,7 @@ class Login extends Component {
   render() {
     let loginForm = (
       <Row className="h-100 align-items-center justify-content-center loginFadeIn">
-        <Col xs="10" sm="6">
+        <Col xs="auto">
           <Form onSubmit={this.handleSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
