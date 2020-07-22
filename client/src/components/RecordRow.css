@@ -19,3 +19,21 @@
   flex-direction: column;
   justify-content: space-between
 }
+
+
+.fade-exit {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+.fade-exit-active {
+    transform: scale(0.4);
+    opacity: 0;
+    transition: transform 200ms, opacity 200ms;
+  }
+
+.fade-exit-done {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+

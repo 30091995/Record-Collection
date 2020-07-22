@@ -49,7 +49,7 @@ class AddRecord extends Component {
               backgroundImage: `url("${this.props.singleRelease.imgUrl}"`,
             }}
           />
-          <div className="card-body">
+          <div className="card-body linkAtBottom">
             <h6 className="card-title">{this.props.singleRelease.title}</h6>
             <Link
               className="text-info smallerText"

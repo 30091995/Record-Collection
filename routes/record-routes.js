@@ -80,6 +80,7 @@ recordRoutes.put("/deleterecord/:record_id", (req, res, next) => {
     { $pull: { owners: req.user.id } }
   ).then(() => {
     console.log("Done");
+    res.json({ msg: "record deleted"})
   });
 });
 
