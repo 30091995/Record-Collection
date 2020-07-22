@@ -76,7 +76,7 @@ class Signup extends Component {
   render() {
     let signupForm = (
       <Row className="h-100 align-items-center justify-content-center signupFadeIn">
-        <Col xs="10" sm="6">
+        <Col xs="auto" lg="3">
           <Form onSubmit={this.handleFormSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
