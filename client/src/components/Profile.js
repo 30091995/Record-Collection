@@ -34,6 +34,7 @@ class Profile extends Component {
   };
 
   removeOneRecord = (_id) => {
+    console.log("removing with id: " + _id)
     let newArr = this.state.records.filter((record) => record._id !== _id);
     this.setState({
       records: newArr,

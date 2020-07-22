@@ -1,24 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RecordRow.css";
 import {
   Button,
 } from "reactstrap";
+import { CSSTransition } from 'react-transition-group';
 
 function RecordRow(props) {
 
+  const [inProp, setInProp] = useState(true);
+
   let removeRecordCallBack = () => {
 
-    axios.put("/api/deleterecord/" + props.record._id).then((response) => {
-      console.log("Record removed from collection");
-      props.removeHandler(props.record._id);
-    });
-    
+      axios.put("/api/deleterecord/" + props.record._id).then((response) => {
+        console.log("Record removed from collection");
+        props.removeHandler(props.record._id)    
+      });
   };
 
 
   return (
+    <CSSTransition in={inProp} onExited={removeRecordCallBack} timeout={200} classNames="fade">
     <div className="card-group">
         
       <div
@@ -46,10 +49,11 @@ function RecordRow(props) {
 
 
         <div className="card-footer bg-white">
-          <Button outline block color="danger" size="sm" onClick={removeRecordCallBack}>Remove</Button>
+          <Button outline block color="danger" size="sm" onClick={() => setInProp(false)}>Remove</Button>
         </div>
       </div>
     </div>
+    </CSSTransition>
   );
 }
 
