@@ -109,7 +109,6 @@ userRoutes.post("/login", (req, res, next) => {
 //POST /api/logout (This route it's used to log out a user from the application!)
 
 userRoutes.post("/logout", (req, res, next) => {
-  // req.logout() is defined by passport
   req.logout();
   res.status(200).json({ message: "Log out success!" });
 });
@@ -148,7 +147,7 @@ userRoutes.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: `${process.env.FRONT_END}/profile`,
-    failureRedirect: "/", // here you would redirect to the login page using traditional login approach
+    failureRedirect: `${process.env.FRONT_END}/login`, // here you would redirect to the login page using traditional login approach
   })
 );
 

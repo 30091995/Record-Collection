@@ -60,7 +60,7 @@ class ShowArtists extends Component {
           {this.state.artists.map((singleArtist) => (
             <div
               key={singleArtist.id}
-              class="card border-info text-black text-left px-2 pt-2"
+              className="card border-info text-black text-left px-2 pt-2"
             >
               <CardImg
                 src={
@@ -70,14 +70,14 @@ class ShowArtists extends Component {
                 }
                 alt="Pic not available"
               />
-              <p className="mt-3 mx-2 text-left">
+              <div className="my-3 mx-2 text-left">
               <CardTitle className="h5 text-info">
                 {singleArtist.title}
               </CardTitle>
               <CardLink className="stretched-link" href={singleArtist.id + "/releases"}>
                 <span className="text-info"> {`${">>"}`} See releases</span>
               </CardLink>
-              </p>
+              </div>
             </div>
           ))}
         </CardColumns>
