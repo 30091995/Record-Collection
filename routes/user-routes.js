@@ -53,9 +53,10 @@ userRoutes.post("/signup", (req, res, next) => {
       if (u !== null) {
         res.status(400).json({
           message: "Email already exists",
-        }); // email already exists
+        });
         throw new Error("Email already exists");
       }
+
       return transporter.sendMail({
         from: '"Record Box" <hackgeorges6@gmail.com>',
         to: email,
@@ -76,9 +77,12 @@ userRoutes.post("/signup", (req, res, next) => {
         token: token,
       });
 
+      
+
       aNewUser.save().then(() => {
         // Automatically log in user after sign up
         // .login() here is actually a predefined passport method
+        
         req.login(aNewUser, () => {
           // Send the user's information to the frontend
           // We can use also: res.status(200).json(req.user);
@@ -126,7 +130,6 @@ userRoutes.get("/verify-email-link/:token", (req, res, next) => {
   if (req.user.token === req.params.token) {
     req.user.verifiedEmail = true;
     req.user.save().then(() => {
-      // res.redirect to React App
       res.redirect(`${process.env.FRONT_END}/profile`);
     });
   }

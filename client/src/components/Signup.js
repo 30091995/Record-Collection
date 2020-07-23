@@ -14,31 +14,34 @@ import {
   Button,
   FormText,
 } from "reactstrap";
+// import { response } from "express";
 
 class Signup extends Component {
+
   state = {
     email: "",
     password: "",
     username: "",
     fullname: "",
-    redirect: false,
     error: null,
+    verifyMessage: null,
   };
 
   // for error alert
   onDismiss = () => {
     this.setState({
       error: null,
+      verifyMessage: null,
     });
   };
 
-  // you can use for every input field
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
   handleFormSubmit = (event) => {
+    
     event.preventDefault();
 
     const email = this.state.email;
@@ -49,13 +52,16 @@ class Signup extends Component {
     axios
       .post("/api/signup", { email, password, username, fullname })
       .then((resp) => {
+
         this.props.updateUser(resp.data);
+
+
         this.setState({
           email: "",
           password: "",
           username: "",
           fullname: "",
-          redirect: true,
+          verifyMessage: "Please verify the email we just sent you",
         });
       })
       .catch((err) => {
@@ -65,12 +71,6 @@ class Signup extends Component {
           });
         }
       });
-  };
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
   };
 
   render() {
@@ -84,11 +84,15 @@ class Signup extends Component {
               </h2>
             </FormText>
 
-            {this.state.error ? (
+            {this.state.error && 
               <Alert toggle={this.onDismiss} color="danger">
                 {this.state.error}
-              </Alert>
-            ) : null}
+              </Alert>}
+
+              {this.state.verifyMessage && 
+              <Alert toggle={this.onDismiss} color="warning">
+                {this.state.verifyMessage}
+              </Alert>}
 
             <FormGroup>
               <Label className="text-info">E-mail</Label>
@@ -160,7 +164,6 @@ class Signup extends Component {
 
     return (
       <Container fluid className="signupFullHeight">
-        {this.renderRedirect()}
         {signupForm}
       </Container>
     );

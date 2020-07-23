@@ -40,10 +40,12 @@ function RecordRow(props) {
             </div>
             <div>
               {props.record.owners.length > 1 && (
-                <div className="text-info smallerText">
+
+                  <div className="text-info smallerText align-middle">
                   {`${">>"}`} Owners{" "}
-                  <Badge color="info">{props.record.owners.length}</Badge>
-                </div>
+                   <Badge color="info" className="alignAlready">{props.record.owners.length} </Badge>
+                  </div>
+
               )}
               <Link
                 className="text-info smallerText"

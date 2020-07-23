@@ -20,7 +20,7 @@ class Login extends Component {
     email: "",
     password: "",
     errorMessage: null,
-    redirect: false,
+    //redirect: false,
   };
 
   // for error alert
@@ -30,11 +30,11 @@ class Login extends Component {
     });
   };
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/profile" />;
-    }
-  };
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to="/profile" />;
+  //   }
+  // };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -54,7 +54,7 @@ class Login extends Component {
       // 2xx status code
       .then((resp) => {
         this.props.updateUser(resp.data);
-        this.setState({ email: "", password: "", redirect: true });
+        this.setState({ email: "", password: "" });
       })
       .catch((error) => {
         this.setState({
@@ -140,7 +140,7 @@ class Login extends Component {
 
     return (
       <Container fluid className="loginFullHeight">
-        {this.renderRedirect()}
+        {/* {this.renderRedirect()} */}
         {loginForm} 
       </Container>
     );

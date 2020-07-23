@@ -141,8 +141,8 @@ class ScanRecord extends Component {
             <Col className="display-4 text-light my-3">Scan a Record</Col>
             <hr className="border border-info rounded"></hr>
             <Col className="h-6 text-light my-3">
-              Scan the Barcode of your record to add it to your collection. <br></br>
-              <small>Please use Chrome.</small>
+              Scan the barcode of a record to add it to your collection. <br></br>
+              <small>Please use Chrome browser</small>
             </Col>
 
             {this.state.scanResult && (
@@ -150,7 +150,6 @@ class ScanRecord extends Component {
                 color="info"
                 outline
                 onClick={() => {
-                  
                   this.setState({scanResult: null, apiAnswer: null})
                   this.quaggaStart();
                 }}
@@ -160,9 +159,9 @@ class ScanRecord extends Component {
             )}
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col xs="auto" id="vid"></Col>
-        </Row>
+          <Row className="justify-content-center align-items-center">
+            <Col xs="auto" id="vid"></Col>
+          </Row>
         {this.state.scanResult && (
           <Row className="justify-content-center m-3 text-center">
             <Row>
