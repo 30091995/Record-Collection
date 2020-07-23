@@ -18,6 +18,7 @@ function NavigationBar(props) {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   let clickHandler = () => {
+
     axios.post("/api/logout").then(() => {
       this.props.updateUser(null);
     });
