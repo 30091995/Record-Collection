@@ -66,7 +66,7 @@ class Profile extends Component {
             </Col>
           </Col>
         </Row>
-        <Row className="justify-content-center mx-3">
+        <Row className="justify-content-center mx-sm-2">
           {filtered.map((record) => (
               <RecordRow
                 key={record._id}
