@@ -141,7 +141,8 @@ class ScanRecord extends Component {
             <Col className="display-4 text-light my-3">Scan a Record</Col>
             <hr className="border border-info rounded"></hr>
             <Col className="h-6 text-light my-3">
-              Scan the Barcode of your record to add it to your collection
+              Scan the Barcode of your record to add it to your collection. <br></br>
+              <small>Please use Chrome.</small>
             </Col>
 
             {this.state.scanResult && (
