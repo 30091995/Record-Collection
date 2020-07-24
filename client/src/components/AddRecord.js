@@ -39,7 +39,7 @@ class AddRecord extends Component {
     return (
       <div className="card-group">
         <div
-          className="card shadow m-2 border-secondary"
+          className="card shadow m-2 border-info"
           style={{ width: "150px" }}
           id="st"
         >
@@ -55,7 +55,7 @@ class AddRecord extends Component {
               className="text-info smallerText"
               to={"/showRelease/" + this.props.singleRelease.recordMainRelease}
             >
-              Show tracks
+              {`${">>"}`} Show tracks
             </Link>
           </div>
 

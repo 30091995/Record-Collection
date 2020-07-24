@@ -10,7 +10,12 @@
   border-width: 2px;
 }
 
-.smallerText {
-  font-size: 0.9rem;
-  font-weight: lighter;
+.text-info.smallerText {
+  font-size: 0.7rem;
+}
+
+.linkAtBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
 }

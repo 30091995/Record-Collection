@@ -13,3 +13,7 @@ video {
   box-sizing: border-box;
   width: 60vw;
 }
+
+body {
+  margin-bottom: 5%;
+}

@@ -10,7 +10,7 @@ import {
   NavLink,
   NavbarText,
 } from "reactstrap";
-import { NavLink as RRNavLink } from 'react-router-dom';
+import { NavLink as RRNavLink } from "react-router-dom";
 
 function NavigationBar(props) {
 
@@ -23,39 +23,62 @@ function NavigationBar(props) {
     });
   };
 
-  let linkActive = {color: "#17a2b8"}
+  let linkActive = { color: "#17a2b8" };
 
   return (
+
+
     <Navbar
       color="light"
       expand="lg"
       light
       fixed="top"
-      className="border-bottom border-faded"
+      className="border-bottom border-info shadow"
     >
       <NavbarBrand href="/profile">Record Box</NavbarBrand>
       <NavbarToggler onClick={toggleNavbar} className="mr-2" />
       <Collapse isOpen={!collapsed} navbar>
         <Nav className="mr-auto" navbar>
           <NavItem>
-            <NavLink tag={RRNavLink} onClick={setCollapsed} activeStyle={linkActive} to="/profile">Your Collection</NavLink>
+            <NavLink
+              tag={RRNavLink}
+              onClick={setCollapsed}
+              activeStyle={linkActive}
+              to="/profile"
+            >
+              Your Collection
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={RRNavLink} onClick={setCollapsed} activeStyle={linkActive} to="/searchArtist">Search for Artist</NavLink>
+            <NavLink
+              tag={RRNavLink}
+              onClick={setCollapsed}
+              activeStyle={linkActive}
+              to="/searchArtist"
+            >
+              Search for Artist
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={RRNavLink} onClick={setCollapsed} activeStyle={linkActive} to="/scan">Scan a Record</NavLink>
+            <NavLink
+              tag={RRNavLink}
+              onClick={setCollapsed}
+              activeStyle={linkActive}
+              to="/scan"
+            >
+              Scan a Record
+            </NavLink>
           </NavItem>
         </Nav>
+        <hr className="display-md-none"></hr>
         <Nav navbar>
-
-          <NavbarText className="d-none d-lg-inline mx-3">
+          <NavbarText className="d-lg-inline mr-3">
             Signed in as:
             <span className="text-info"> {props.user.username}</span>
           </NavbarText>
 
           <NavItem>
-            <NavLink href="/" onClick={clickHandler}>
+            <NavLink href="/" onClick={clickHandler} activeStyle={linkActive}>
               Logout
             </NavLink>
           </NavItem>

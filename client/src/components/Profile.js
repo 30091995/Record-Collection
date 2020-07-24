@@ -40,6 +40,7 @@ class Profile extends Component {
     });
   };
 
+  
   render() {
     let filtered = [];
     filtered = this.state.records.filter((record) => {
@@ -47,7 +48,6 @@ class Profile extends Component {
       record.artist.toLowerCase().includes(this.state.searchTerm.toLowerCase())
       )
     });
-
     
     return (
       <Container fluid className="topMargin">
@@ -66,13 +66,13 @@ class Profile extends Component {
           </Col>
         </Row>
 
-        <Row className="justify-content-center">
+        <Row className="justify-content-center mx-3">
           {filtered.map((record) => (
-            <RecordRow
-              key={record._id}
-              record={record}
-              removeHandler={this.removeOneRecord}
-            />
+              <RecordRow
+                key={record._id}
+                record={record}
+                removeHandler={this.removeOneRecord}
+              />
           ))}
         </Row>
       </Container>
