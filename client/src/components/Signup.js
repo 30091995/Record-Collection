@@ -76,7 +76,7 @@ class Signup extends Component {
   render() {
     let signupForm = (
       <Row className="h-100 align-items-center justify-content-center signupFadeIn">
-        <Col xs="auto" lg="3">
+        <Col xs="auto" md="4">
           <Form onSubmit={this.handleFormSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
@@ -84,13 +84,13 @@ class Signup extends Component {
               </h2>
             </FormText>
 
-            {this.state.error && 
+             {this.state.error && 
               <Alert toggle={this.onDismiss} color="danger">
                 {this.state.error}
               </Alert>}
 
               {this.state.verifyMessage && 
-              <Alert toggle={this.onDismiss} color="warning">
+              <Alert toggle={this.onDismiss} color="info">
                 {this.state.verifyMessage}
               </Alert>}
 
