@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Signup.css";
 import {
   Container,
@@ -14,7 +14,6 @@ import {
   Button,
   FormText,
 } from "reactstrap";
-// import { response } from "express";
 
 class Signup extends Component {
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import {
   Container,
@@ -20,10 +20,8 @@ class Login extends Component {
     email: "",
     password: "",
     errorMessage: null,
-    //redirect: false,
   };
 
-  // for error alert
   onDismiss = () => {
     this.setState({
       errorMessage: null,
@@ -60,7 +58,7 @@ class Login extends Component {
   render() {
     let loginForm = (
       <Row className="h-100 align-items-center justify-content-center loginFadeIn">
-        <Col xs="auto" lg="4">
+        <Col xs="auto" md="4">
           <Form onSubmit={this.handleSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
@@ -134,7 +132,6 @@ class Login extends Component {
 
     return (
       <Container fluid className="loginFullHeight">
-        {/* {this.renderRedirect()} */}
         {loginForm} 
       </Container>
     );
