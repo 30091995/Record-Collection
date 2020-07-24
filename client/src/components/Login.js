@@ -30,12 +30,6 @@ class Login extends Component {
     });
   };
 
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {
-  //     return <Redirect to="/profile" />;
-  //   }
-  // };
-
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -66,7 +60,7 @@ class Login extends Component {
   render() {
     let loginForm = (
       <Row className="h-100 align-items-center justify-content-center loginFadeIn">
-        <Col xs="auto">
+        <Col xs="auto" lg="4">
           <Form onSubmit={this.handleSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
