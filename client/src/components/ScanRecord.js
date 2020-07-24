@@ -2,22 +2,29 @@ import React, { Component } from "react";
 import "./ScanRecord.css";
 import axios from "axios";
 import AddRecord from "./AddRecord";
-import { Row, Col, Button, Container } from "reactstrap";
+import { Row, Col, Button, Container, Collapse } from "reactstrap";
 import Quagga from "quagga";
 
 class ScanRecord extends Component {
   state = {
     scanResult: null,
     apiAnswer: null,
+    isOpen: false,
+    disabled: false,
   };
-
-  componentDidMount() {
-    this.quaggaStart();
-  }
 
   componentWillUnmount() {
     Quagga.stop();
   }
+
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+      scanResult: null,
+      apiAnswer: null,
+      disabled: !this.state.disabled,
+    });
+  };
 
   quaggaStart = () => {
     Quagga.init(
@@ -94,6 +101,7 @@ class ScanRecord extends Component {
     Quagga.onDetected((data) => {
       if (data) {
         Quagga.stop();
+
         axios
           .get("/api/scanRecord/" + data.codeResult.code)
           .then((response) => {
@@ -101,6 +109,8 @@ class ScanRecord extends Component {
             this.setState({
               scanResult: data.codeResult.code,
               apiAnswer: allResults,
+              isOpen: false,
+              disabled: false,
             });
           });
       }
@@ -140,44 +150,39 @@ class ScanRecord extends Component {
           <Col xs="auto" className="text-center my-4">
             <Col className="display-4 text-light my-3">Scan a Record</Col>
             <hr className="border border-info rounded"></hr>
-            <Col className="h-6 text-light my-3">
-              Scan the Barcode of your record to add it to your collection. <br></br>
-              <small>Please use Chrome.</small>
-            </Col>
 
-            {this.state.scanResult && (
-              <Button
-                color="info"
-                outline
-                onClick={() => {
-                  
-                  this.setState({scanResult: null, apiAnswer: null})
-                  this.quaggaStart();
-                }}
-              >
-                Scan again
-              </Button>
+            {!this.state.scanResult ? (
+              <Col className="h-6 text-light my-3">
+                Scan the barcode of a record and add it to your collection
+              </Col>
+            ) : (
+              <Col className="h-6 text-light my-3">
+                Record found for barcode
+                <span className="text-info mx-1">{this.state.scanResult}</span>
+              </Col>
             )}
+
+            <Button
+              color="info"
+              disabled={this.state.disabled}
+              onClick={() => {
+                this.toggle();
+                this.quaggaStart();
+              }}
+            >
+              {!this.state.scanResult ? "Scan" : "Scan again"}
+            </Button>
           </Col>
         </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col xs="auto" id="vid"></Col>
-        </Row>
-        {this.state.scanResult && (
-          <Row className="justify-content-center m-3 text-center">
-            <Row>
-              <h4 className="text-center">
-                Records found for barcode <br></br>
-                <span className="text-info font-weight-normal">
-                  {this.state.scanResult}
-                </span>
-              </h4>
-            </Row>
-          </Row>
-        )}
         <Row className="justify-content-center">
           {this.state.scanResult && scannedRecordApiAnswer()}
         </Row>
+
+        <Collapse isOpen={this.state.isOpen}>
+          <Row className="justify-content-center align-items-center">
+            <Col xs="auto" id="vid"></Col>
+          </Row>
+        </Collapse>
       </Container>
     );
   }

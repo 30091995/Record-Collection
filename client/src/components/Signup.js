@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Signup.css";
 import {
   Container,
@@ -16,29 +16,31 @@ import {
 } from "reactstrap";
 
 class Signup extends Component {
+
   state = {
     email: "",
     password: "",
     username: "",
     fullname: "",
-    redirect: false,
     error: null,
+    verifyMessage: null,
   };
 
   // for error alert
   onDismiss = () => {
     this.setState({
       error: null,
+      verifyMessage: null,
     });
   };
 
-  // you can use for every input field
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
   handleFormSubmit = (event) => {
+    
     event.preventDefault();
 
     const email = this.state.email;
@@ -49,13 +51,16 @@ class Signup extends Component {
     axios
       .post("/api/signup", { email, password, username, fullname })
       .then((resp) => {
+
         this.props.updateUser(resp.data);
+
+
         this.setState({
           email: "",
           password: "",
           username: "",
           fullname: "",
-          redirect: true,
+          verifyMessage: "Please verify the email we just sent you",
         });
       })
       .catch((err) => {
@@ -67,16 +72,10 @@ class Signup extends Component {
       });
   };
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
-  };
-
   render() {
     let signupForm = (
       <Row className="h-100 align-items-center justify-content-center signupFadeIn">
-        <Col xs="auto" lg="3">
+        <Col xs="auto" md="4">
           <Form onSubmit={this.handleFormSubmit}>
             <FormText className="my-4">
               <h2 className="h2">
@@ -84,11 +83,15 @@ class Signup extends Component {
               </h2>
             </FormText>
 
-            {this.state.error ? (
+             {this.state.error && 
               <Alert toggle={this.onDismiss} color="danger">
                 {this.state.error}
-              </Alert>
-            ) : null}
+              </Alert>}
+
+              {this.state.verifyMessage && 
+              <Alert toggle={this.onDismiss} color="info">
+                {this.state.verifyMessage}
+              </Alert>}
 
             <FormGroup>
               <Label className="text-info">E-mail</Label>
@@ -160,7 +163,6 @@ class Signup extends Component {
 
     return (
       <Container fluid className="signupFullHeight">
-        {this.renderRedirect()}
         {signupForm}
       </Container>
     );

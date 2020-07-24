@@ -71,12 +71,15 @@ class ShowArtists extends Component {
                 alt="Pic not available"
               />
               <div className="my-3 mx-2 text-left">
-              <CardTitle className="h5 text-info">
-                {singleArtist.title}
-              </CardTitle>
-              <CardLink className="stretched-link" href={singleArtist.id + "/releases"}>
-                <span className="text-info"> {`${">>"}`} See releases</span>
-              </CardLink>
+                <CardTitle className="h5 text-info">
+                  {singleArtist.title}
+                </CardTitle>
+                <CardLink
+                  className="stretched-link"
+                  href={singleArtist.id + "/releases"}
+                >
+                  <span className="text-info"> {`${">>"}`} See releases</span>
+                </CardLink>
               </div>
             </div>
           ))}
