@@ -1,9 +1,10 @@
 .startFullHeight {
   height: 100vh;
-  background-image: url("../images/record-background-large.jpg");
+  background-image: url("../images/record-background-large-sq.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
 }
 
 .fadeIn {

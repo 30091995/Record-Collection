@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import "./Start.css";
 
@@ -7,11 +7,7 @@ class Start extends Component {
   state = {};
 
   render() {
-    return this.props.user ? (
-      <div>
-        <Redirect to="/profile"></Redirect>
-      </div>
-    ) : (
+    return (
       <Container fluid className="startFullHeight fadeIn">
         <Row className="h-100 align-items-center justify-content-center">
           <Col xs="10" md="auto" className="fadeIn text-center">
@@ -34,7 +30,7 @@ class Start extends Component {
           </Col>
         </Row>
       </Container>
-    );
+    )
   }
 }
 
