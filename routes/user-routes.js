@@ -15,15 +15,16 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user-model.js");
 
 // SMTP
-let transporter = nodemailer.createTransport({
-  host: process.env.SENDGRID_HOSTNAME,
-  secure: false,
-  port: process.env.SENDGRID_PORT,
+
+let smtpTransport = require('nodemailer-smtp-transport');
+
+let transporter = nodemailer.createTransport(smtpTransport({
+  service: "gmail",
   auth: {
-    user: process.env.SENDGRID_USERNAME,
-    pass: process.env.SENDGRID_API_KEY,
-  },
-});
+    user: "francescosaccone95@gmail.com",
+    pass: "lupo.alberto95"
+  }
+}));
 
 // POST /api/signup (This route sign up a user in the database)
 
@@ -58,7 +59,7 @@ userRoutes.post("/signup", (req, res, next) => {
       }
 
       return transporter.sendMail({
-        from: '"Record Box" <hackgeorges6@gmail.com>',
+        from: '"Record box" <hackgeorges6@gmail.com>',
         to: email,
         subject: "Email verification token",
         text: `Hey, thanks for joining recordbox! Click the link to confirm your mail adress: ${process.env.EMAIL_LINK}/${token}`,
