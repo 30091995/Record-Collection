@@ -3,9 +3,12 @@ import axios from "axios";
 import {
   Collapse,
   Navbar,
+  Button,
   NavbarToggler,
   NavbarBrand,
   Nav,
+  Row,
+  Col,
   NavItem,
   NavLink,
   NavbarText,
@@ -18,8 +21,9 @@ function NavigationBar(props) {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   let clickHandler = () => {
+
     axios.post("/api/logout").then(() => {
-      this.props.updateUser(null);
+      props.updateUser(null);
     });
   };
 
@@ -78,9 +82,16 @@ function NavigationBar(props) {
           </NavbarText>
 
           <NavItem>
-            <NavLink href="/" onClick={clickHandler} activeStyle={linkActive}>
+          <Row>
+          <Col xs="auto">
+          <Button tag={NavLink} xs="auto" onClick={clickHandler} activeStyle={linkActive} color="white">
+      Logout
+          </Button>
+          </Col>
+          </Row>
+            {/* <NavLink href="javascript:void(0);" onClick={clickHandler} activeStyle={linkActive}>
               Logout
-            </NavLink>
+            </NavLink> */}
           </NavItem>
         </Nav>
       </Collapse>

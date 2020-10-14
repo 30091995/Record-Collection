@@ -4,11 +4,9 @@ import axios from "axios";
 import placeholderImage from "../images/default-band-image.png";
 import {
   Container,
-  Card,
   CardImg,
   CardColumns,
   CardTitle,
-  CardImgOverlay,
   Row,
   Col,
   CardLink,
@@ -62,7 +60,7 @@ class ShowArtists extends Component {
           {this.state.artists.map((singleArtist) => (
             <div
               key={singleArtist.id}
-              class="card border-info text-black text-left px-2 pt-2"
+              className="card border-info text-black text-left px-2 pt-2"
             >
               <CardImg
                 src={
@@ -72,14 +70,17 @@ class ShowArtists extends Component {
                 }
                 alt="Pic not available"
               />
-              <p className="mt-3 mx-2 text-left">
-              <CardTitle className="h5 text-info">
-                {singleArtist.title}
-              </CardTitle>
-              <CardLink className="stretched-link" href={singleArtist.id + "/releases"}>
-                <span className="text-info"> {`${">>"}`} See releases</span>
-              </CardLink>
-              </p>
+              <div className="my-3 mx-2 text-left">
+                <CardTitle className="h5 text-info">
+                  {singleArtist.title}
+                </CardTitle>
+                <CardLink
+                  className="stretched-link"
+                  href={singleArtist.id + "/releases"}
+                >
+                  <span className="text-info"> {`${">>"}`} See releases</span>
+                </CardLink>
+              </div>
             </div>
           ))}
         </CardColumns>

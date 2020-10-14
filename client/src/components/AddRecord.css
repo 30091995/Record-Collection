@@ -2,3 +2,9 @@
   font-size: 0.9rem;
   font-weight: lighter;
 }
+
+.linkAtBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+}

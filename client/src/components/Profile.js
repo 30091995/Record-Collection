@@ -34,6 +34,7 @@ class Profile extends Component {
   };
 
   removeOneRecord = (_id) => {
+    console.log("removing with id: " + _id)
     let newArr = this.state.records.filter((record) => record._id !== _id);
     this.setState({
       records: newArr,
@@ -53,7 +54,7 @@ class Profile extends Component {
       <Container fluid className="topMargin">
         <Row className="justify-content-center align-items-center">
           <Col xs="auto" className="text-center my-4">
-            <Col className="display-4 text-light my-3">Your Records</Col>
+            <Col className="display-4 text-light my-3">Your Collection</Col>
             <hr className="border border-info rounded"></hr>
             <Col className="py-4">
               <Input
@@ -65,8 +66,7 @@ class Profile extends Component {
             </Col>
           </Col>
         </Row>
-
-        <Row className="justify-content-center mx-3">
+        <Row className="justify-content-center mx-sm-2">
           {filtered.map((record) => (
               <RecordRow
                 key={record._id}

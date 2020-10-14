@@ -15,15 +15,16 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user-model.js");
 
 // SMTP
-let transporter = nodemailer.createTransport({
-  host: process.env.SENDGRID_HOSTNAME,
-  secure: false,
-  port: process.env.SENDGRID_PORT,
+
+let smtpTransport = require('nodemailer-smtp-transport');
+
+let transporter = nodemailer.createTransport(smtpTransport({
+  service: "gmail",
   auth: {
-    user: process.env.SENDGRID_USERNAME,
-    pass: process.env.SENDGRID_API_KEY,
-  },
-});
+    user: "francescosaccone95@gmail.com",
+    pass: "lupo.alberto95"
+  }
+}));
 
 // POST /api/signup (This route sign up a user in the database)
 
@@ -53,11 +54,12 @@ userRoutes.post("/signup", (req, res, next) => {
       if (u !== null) {
         res.status(400).json({
           message: "Email already exists",
-        }); // email already exists
+        });
         throw new Error("Email already exists");
       }
+
       return transporter.sendMail({
-        from: '"Record Box" <hackgeorges6@gmail.com>',
+        from: '"Record box" <hackgeorges6@gmail.com>',
         to: email,
         subject: "Email verification token",
         text: `Hey, thanks for joining recordbox! Click the link to confirm your mail adress: ${process.env.EMAIL_LINK}/${token}`,
@@ -76,9 +78,12 @@ userRoutes.post("/signup", (req, res, next) => {
         token: token,
       });
 
+      
+
       aNewUser.save().then(() => {
         // Automatically log in user after sign up
         // .login() here is actually a predefined passport method
+        
         req.login(aNewUser, () => {
           // Send the user's information to the frontend
           // We can use also: res.status(200).json(req.user);
@@ -109,7 +114,6 @@ userRoutes.post("/login", (req, res, next) => {
 //POST /api/logout (This route it's used to log out a user from the application!)
 
 userRoutes.post("/logout", (req, res, next) => {
-  // req.logout() is defined by passport
   req.logout();
   res.status(200).json({ message: "Log out success!" });
 });
@@ -127,7 +131,6 @@ userRoutes.get("/verify-email-link/:token", (req, res, next) => {
   if (req.user.token === req.params.token) {
     req.user.verifiedEmail = true;
     req.user.save().then(() => {
-      // res.redirect to React App
       res.redirect(`${process.env.FRONT_END}/profile`);
     });
   }
@@ -148,7 +151,7 @@ userRoutes.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: `${process.env.FRONT_END}/profile`,
-    failureRedirect: "/", // here you would redirect to the login page using traditional login approach
+    failureRedirect: `${process.env.FRONT_END}/login`, // here you would redirect to the login page using traditional login approach
   })
 );
 

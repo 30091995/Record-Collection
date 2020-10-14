@@ -41,7 +41,7 @@ class ShowReleases extends Component {
         </Row>
 
         {this.state.releases.length > 0 ? (
-          <Row className="justify-content-center">
+          <Row className="justify-content-center mx-3">
             {this.state.releases.map((release, index) => {
               singleRelease = {
                 artist: release.artist,
